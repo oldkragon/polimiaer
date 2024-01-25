@@ -56,6 +56,21 @@ int ToBinary(int v, char *res, int l) {
     return 1;
 }
 
+void C2Inverse(char *s, int l){
+    for (int i = 0; i < l; i++)
+    {
+        if(s[i]== 0) s[i]=1;
+        else s[i] = 0;
+    }
+    int r =1;
+    for (int i = 0; i < l && r; i++)
+    {
+        s[i]+=1;
+        if(s[1]>i) s[i]-= 2;
+        else r = 0;
+    }
+}
+
 int CheckPrime(int n) {
     if(n == 1 || n == 0) return 0;
     for (int i = 2; i <= sqrt(n); i++) {

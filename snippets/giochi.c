@@ -1,0 +1,1 @@
+//to-do scarto, biscarto, zeppa, sciarada, isogramma, metagramma
