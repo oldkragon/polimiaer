@@ -1,6 +1,6 @@
 //This is a collection of useful function to operate on arrays
 //min, max, invert, swap two el, sort, check symmetry, fill matrix, scan matrix, print matrix, make symmetric matrix
-//create transposed matrix, all partial sums, sum of two matrices, create cartesian product, remove duplicates
+//create transposed matrix, all partial sums, sum of two matrices element by element an as nums, create cartesian product, remove duplicates
 //diagonal sum, join arrays
 #include <stdio.h>
 #include <string.h>
@@ -160,6 +160,27 @@ int* SumOfTwoMatrices(int *m1, int *m2, int n, int m){
         }
     }
     return p;
+}
+
+int SumAsNumbers(int a[N], int b[N], int c[N]) {
+    int remainder = 0, err = 0;
+    for (int i = 0; i < N-1; ++i) {
+        c[i] = (a[i]+b[i]+remainder);
+        if(c[i]>1){
+            remainder = 1;
+            c[i] -= 2;
+        } else remainder = 0;
+    }
+    c[N-1] = remainder-a[N-1]-b[N-1];
+    if(c[N-1]<-1 || c[N-1]>0) {
+        c[N-1] = c[N-1] % 2;
+        err = 1;
+    }
+    if(c[N-1] == -1) c[N-1] = 1;
+    for (int i = N-1; i >= 0; i--)
+        printf("%d", c[i]);
+
+    return err;
 }
 
 int* CreateCartesianProd(int *p1, int *p2, int d1, int d2, int d3){

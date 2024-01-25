@@ -1,8 +1,10 @@
-// Cypher, finite memory filter, to base 10, to binary,  check prime, filter primes, solve quadratic in R and in C
-//GCD (Euclid's algorithm),
+// Cypher, finite memory filter, to base 10, to binary, from base 12,  check prime, filter primes, solve quadratic in R and in C
+//GCD (Euclid's algorithm), read a line containing name and frequency of object untill an empty line is given (2 funcs needed)
+
 
 #include <stdio.h>
 #include <math.h>
+#define N 100
 
 int Cypher(char c, int n){
     if (c>= 'A' && c < 'Z' || c>= 'a' && c < 'z'){
@@ -54,6 +56,44 @@ int ToBinary(int v, char *res, int l) {
         res[pos - i -1] = temp;
     }
     return 1;
+}
+
+int FromBase12(){
+    char num12[N+1];
+    int num10 = 0, sign = 1, l;
+    scanf("%8s", num12);
+    l = strlen(num12);
+    for (int i = 0; i < 8 && num12[i] != '\0'; i++) {
+        switch (num12[i]) {
+            case '+':
+                continue;
+            case '-':
+                sign = -1;
+                continue;
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                num12[i] -= '0';
+                break;
+            case 'a':
+            case 'b':
+                num12[i] -= 'a';
+                num12[i] += 10;
+                break;
+            default:
+                return -1*pow(12, 7);
+        }
+        num10 += num12[i] * pow(12, l - i - 1);
+    }
+    num10 *= sign;
+    return num10;
 }
 
 void C2Inverse(char *s, int l){
@@ -139,4 +179,36 @@ int GCD(int x, int y) {
         y = temp;
     }
     return x;
+}
+
+typedef struct _data {
+    char name[128];
+    int arr[N];
+} data;
+
+int ReadLineAndHash(data *dt) {
+    int i = 0;
+    char t[128], *s, *r;
+    r = NULL;
+    memset(dt->arr, 0, sizeof(data));
+    r = fgets(t, 128, stdin);
+    if(!r||r[0]=='\n') return 0;
+    int read = sscanf(t, "%s", dt->name);
+    s = t + strlen(dt->name);
+    while (sscanf(s, "%d", &i) == 1) {
+        dt->arr[i] = 1;
+        do {s++;} while (*s>='0'&&*s<='9');
+    }
+    return read;
+}
+
+data *ReadUntillEmpryLine() {
+    data *ex = malloc(sizeof(data) * N);
+    int i = 0;
+    while (ReadLineAndHash(ex+i)){
+        i++;
+    }
+    memset((ex+i)->arr, 0, sizeof(data));
+    strcpy((ex+i)->name, "\0");
+    return ex;
 }
