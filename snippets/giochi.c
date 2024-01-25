@@ -1,4 +1,3 @@
-//to-do scarto, biscarto, zeppa, sciarada, isogramma, metagramma
 //scarto, biscarto, metagramma, 
 #include <stdio.h>
 #define N 100 
