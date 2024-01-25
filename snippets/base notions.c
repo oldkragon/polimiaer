@@ -1,4 +1,5 @@
-// Cypher, finite memory filter, to base 10, to binary, from base 12,  check prime, filter primes, solve quadratic in R and in C
+// Cypher, finite memory filter, to base 10, to binary, from base 12, inverse in c2, sum in C2,
+// check prime, filter primes, solve quadratic in R and in C
 //GCD (Euclid's algorithm), read a line containing name and frequency of object untill an empty line is given (2 funcs needed)
 
 
@@ -109,6 +110,30 @@ void C2Inverse(char *s, int l){
         if(s[1]>i) s[i]-= 2;
         else r = 0;
     }
+}
+
+//returns error code for overflow
+int C2Sum(int a[N], int b[N], int c[N]) {
+    int r = 0;
+
+    for (int i = 0; i < N; i++) {
+        scanf("%d", &a[i]);
+    }
+
+    for (int i = 0; i < N; i++) {
+        scanf("%d", &b[i]);
+    }
+
+    for (int i = N - 1; i > 0; i--) {
+        c[i] = a[i] + b[i] + r;
+
+        if (c[i] > 1) {
+            r = 1;
+            c[i] -= 2;
+        } else r = 0;
+    }
+    if ((a[0]==b[0]&&c[0])||r) return 1;
+    return 0;
 }
 
 int CheckPrime(int n) {
