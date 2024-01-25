@@ -1,5 +1,5 @@
 //This is a collection of useful function to operate on strings
-//concatenate(StrCat), delete a char, extend, sum
+//concatenate(StrCat), delete a char, extend, sum, count frequency
 
 #include <stdio.h>
 #include <string.h>
@@ -82,3 +82,19 @@ char* Sum(char *x, char *y) {
     }
     return r;
 }
+
+int *CountFrequency(char*s){
+    unsigned char c=0;
+    int f[256]={0}; //se nel main va bene, altimenti usare una malloc
+    for (int i = 0; i < strlen(s); i++)
+    {
+        f[c]++;
+    }
+    return f;
+}
+    
+   /*while(c<n){
+        scanf("%c", &c);
+        if (c==EOF||c=='\n'||c=='\0') break;
+        f[c]++;
+    }  per leggerli dal terminale*/ 
