@@ -7,4 +7,3 @@ Hello I'm an aerospace engineering student at polimi, this is all the material I
 [Fondamenti di chimica](https://github.com/oldkragon/polimiaer/tree/main/Chimica)
 [Informatica per aerospaziali](https://github.com/oldkragon/polimiaer/tree/main/Informatica)
 
-Modifica di prova
