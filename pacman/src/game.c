@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
+#include <math.h>
 
 #define WIDTH 28
 #define HEIGHT 31
@@ -82,20 +83,20 @@ void InitializeGame(game Game){
         }
     }
 
-    Game.Pinky.x == 14;
-    Game.Pinky.y == 16;
+    Game.Pinky.x = 14;
+    Game.Pinky.y = 16;
 
-    Game.Blinky.x == 14;
-    Game.Blinky.y == 16;
+    Game.Blinky.x = 14;
+    Game.Blinky.y = 16;
 
-    Game.Inky.x == 15;
-    Game.Inky.y == 16;
+    Game.Inky.x = 15;
+    Game.Inky.y = 16;
 
-    Game.Clyde.x == 15;
-    Game.Clyde.y == 16;
+    Game.Clyde.x = 15;
+    Game.Clyde.y = 16;
 
-    Game.PacMan.x == 15;
-    Game.PacMan.y == 16;
+    Game.PacMan.x = 15;
+    Game.PacMan.y = 16;
 
     Game.moveCounter = 0;
 }
@@ -156,7 +157,7 @@ void UpdateGame(game Game){
 
     Game.moveCounter ++;
 
-    while (Game.moveCounter>=7){
+    while (Game.moveCounter > 7){
         //Blinky lo segue diretto - parte 7 mosse dopo
         if(Game.PacMan.x > Game.Blinky.x && Game.PacMan.y >= Game.Blinky.y){
             if(Game.maze[Game.Blinky.y-1][Game.Blinky.x] != 'm')
@@ -204,7 +205,6 @@ void UpdateGame(game Game){
 
         }
         //Pinky tenta di capire dove sarà tra 4 mosse
-
         position predictedPacManPos = Game.PacMan;
 
         switch (input) {
@@ -244,49 +244,52 @@ void UpdateGame(game Game){
         }
 
         if(predictedPacManPos.x > Game.Pinky.x && predictedPacManPos.y >= Game.Pinky.y){
-            if(Game.maze[Game.Blinky.y-1][Game.Blinky.x] != 'm')
+            if(Game.maze[Game.Pinky.y-1][Game.Pinky.x] != 'm')
                 Game.Pinky.y--;
-            else if(Game.maze[Game.Blinky.y][Game.Blinky.x+1] != 'm')
+            else if(Game.maze[Game.Pinky.y][Game.Pinky.x+1] != 'm')
                 Game.Pinky.x++;
-            else if(Game.maze[Game.Blinky.y+1][Game.Blinky.x] != 'm')
+            else if(Game.maze[Game.Pinky.y+1][Game.Pinky.x] != 'm')
                 Game.Pinky.y++;
-            else if(Game.maze[Game.Blinky.y][Game.Blinky.x-1] != 'm')
+            else if(Game.maze[Game.Pinky.y][Game.Pinky.x-1] != 'm')
                 Game.Pinky.x--;
         }
 
         if(predictedPacManPos.x >= Game.Pinky.x && predictedPacManPos.y < Game.Pinky.y){
-            if(Game.maze[Game.Blinky.y][Game.Blinky.x+1] != 'm')
+            if(Game.maze[Game.Pinky.y][Game.Pinky.x+1] != 'm')
                 Game.Pinky.x++;
-            else if(Game.maze[Game.Blinky.y+1][Game.Blinky.x] != 'm')
+            else if(Game.maze[Game.Pinky.y+1][Game.Pinky.x] != 'm')
                 Game.Pinky.y++;
-            else if(Game.maze[Game.Blinky.y][Game.Blinky.x-1] != 'm')
+            else if(Game.maze[Game.Pinky.y][Game.Pinky.x-1] != 'm')
                 Game.Pinky.x--;
-            else if(Game.maze[Game.Blinky.y-1][Game.Blinky.x] != 'm')
+            else if(Game.maze[Game.Pinky.y-1][Game.Pinky.x] != 'm')
                 Game.Pinky.y--;
         }
 
         if(predictedPacManPos.x < Game.Pinky.x && predictedPacManPos.y <= Game.Pinky.y){
-            if(Game.maze[Game.Blinky.y+1][Game.Blinky.x] != 'm')
+            if(Game.maze[Game.Pinky.y+1][Game.Pinky.x] != 'm')
                 Game.Pinky.y++;
-            else if(Game.maze[Game.Blinky.y][Game.Blinky.x-1] != 'm')
+            else if(Game.maze[Game.Pinky.y][Game.Pinky.x-1] != 'm')
                 Game.Pinky.x--;
-            else if(Game.maze[Game.Blinky.y-1][Game.Blinky.x] != 'm')
+            else if(Game.maze[Game.Pinky.y-1][Game.Pinky.x] != 'm')
                 Game.Pinky.y--;
-            else if(Game.maze[Game.Blinky.y][Game.Blinky.x+1] != 'm')
+            else if(Game.maze[Game.Pinky.y][Game.Pinky.x+1] != 'm')
                 Game.Pinky.x++;
         }
 
 
         if(predictedPacManPos.x <= Game.Pinky.x && predictedPacManPos.y > Game.Pinky.y){
-            if(Game.maze[Game.Blinky.y][Game.Blinky.x-1] != 'm')
+            if(Game.maze[Game.Pinky.y][Game.Pinky.x-1] != 'm')
                 Game.Pinky.x--;
-            else if(Game.maze[Game.Blinky.y-1][Game.Blinky.x] != 'm')
+            else if(Game.maze[Game.Pinky.y-1][Game.Pinky.x] != 'm')
                 Game.Pinky.y--;
-            else if(Game.maze[Game.Blinky.y][Game.Blinky.x+1] != 'm')
+            else if(Game.maze[Game.Pinky.y][Game.Pinky.x+1] != 'm')
                 Game.Pinky.x++;
-            else if(Game.maze[Game.Blinky.y+1][Game.Blinky.x] != 'm')
+            else if(Game.maze[Game.Pinky.y+1][Game.Pinky.x] != 'm')
                 Game.Pinky.y++;
         }
+        //Clyde si muove a caso se si trova ad una distanza <= di 8 celle da Pacman, altrimenti fa come Blinky
+
+        if()
 
 
     }//fine while
