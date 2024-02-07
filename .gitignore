@@ -1,3 +1,4 @@
 *.exe
 *.dll
-polimiaer/pacman/lib/
+
+pacman/lib/
