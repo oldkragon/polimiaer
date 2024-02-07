@@ -41,7 +41,36 @@ int main(){
 }
 
 void InitializeGame(game Game){
-    char InitialMaze = //inserire la matrice
+    char InitialMaze = {{m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m}
+                        {m, ., ., ., ., ., ., ., ., ., ., ., ., m, m, ., ., ., ., ., ., ., ., ., ., ., ., m}
+                        {m, ., m, m, m, m, ., m, m, m, m, m, ., m, m, ., m, m, m, m, m, ., m, m, m, m, ., m}
+                        {m, ., m, m, m, m, ., m, m, m, m, m, ., m, m, ., m, m, m, m, m, ., m, m, m, m, ., m}
+                        {m, ., m, m, m, m, ., m, m, m, m, m, ., m, m, ., m, m, m, m, m, ., m, m, m, m, ., m}
+                        {m, ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., m}
+                        {m, ., m, m, m, m, ., m, m, ., m, m, m, m, m, m, m, m, ., m, m, ., m, m, m, m, ., m}
+                        {m, ., m, m, m, m, ., m, m, ., m, m, m, m, m, m, m, m, ., m, m, ., m, m, m, m, ., m}
+                        {m, ., ., ., ., ., ., m, m, ., ., ., ., m, m, ., ., ., ., m, m, ., ., ., ., ., ., m}
+                        {m, m, m, m, m, m, ., m, m, m, m, m, ., m, m, ., m, m, m, m, m, ., m, m, m, m, m, m}
+                        {m, m, m, m, m, m, ., m, m, m, m, m, ., m, m, ., m, m, m, m, m, ., m, m, m, m, m, m}
+                        {m, m, m, m, m, m, ., m, m, ., ., ., ., ., ., ., ., ., ., m, m, ., m, m, m, m, m, m}
+                        {m, m, m, m, m, m, ., m, m, ., m, m, m, ., ., m, m, m, ., m, m, ., m, m, m, m, m, m}
+                        {m, m, m, m, m, m, ., m, m, ., m, ., ., ., ., ., ., m, ., m, m, ., m, m, m, m, m, m}
+                        {., ., ., ., ., ., ., ., ., ., m, ., ., ., ., ., ., m, ., ., ., ., ., ., ., ., ., .}
+                        {m, m, m, m, m, m, ., m, m, ., m, ., ., ., ., ., ., m, ., m, m, ., m, m, m, m, m, m}
+                        {m, m, m, m, m, m, ., m, m, ., m, m, m, m, m, m, m, m, ., m, m, ., m, m, m, m, m, m}
+                        {m, m, m, m, m, m, ., m, m, ., ., ., ., ., ., ., ., ., ., m, m, ., m, m, m, m, m, m}
+                        {m, m, m, m, m, m, ., m, m, ., m, m, m, m, m, m, m, m, ., m, m, ., m, m, m, m, m, m}
+                        {m, m, m, m, m, m, ., m, m, ., m, m, m, m, m, m, m, m, ., m, m, ., m, m, m, m, m, m}
+                        {m, ., ., ., ., ., ., ., ., ., ., ., ., m, m, ., ., ., ., ., ., ., ., ., ., ., ., m}
+                        {m, ., m, m, m, m, ., m, m, m, m, m, ., m, m, ., m, m, m, m, m, ., m, m, m, m, ., m}
+                        {m, ., m, m, m, m, ., m, m, m, m, m, ., m, m, ., m, m, m, m, m, ., m, m, m, m, ., m}
+                        {m, ., ., ., m, m, ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., m, m, ., ., ., m}
+                        {m, m, m, ., m, m, ., m, m, ., m, m, m, m, m, m, m, m, ., m, m, ., m, m, ., m, m, m}
+                        {m, m, m, ., m, m, ., m, m, ., m, m, m, m, m, m, m, m, ., m, m, ., m, m, ., m, m, m}
+                        {m, ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., ., m}
+                        {m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m, m}
+
+    };
     Game.lives = 3;
     Game.score = 0;
 
@@ -51,7 +80,20 @@ void InitializeGame(game Game){
         }
     }
 
-    Game.Pinky.x == Game.maze[]
+    Game.Pinky.x == 14;
+    Game.Pinky.y == 16;
+
+    Game.Blinky.x == 14;
+    Game.Blinky.y == 16;
+
+    Game.Inky.x == 15;
+    Game.Inky.y == 16;
+
+    Game.Clyde.x == 15;
+    Game.Clyde.y == 16;
+
+    Game.PacMan.x == 15;
+    Game.PacMan.y == 16;
 }
 
 
