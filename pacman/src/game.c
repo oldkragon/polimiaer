@@ -44,7 +44,6 @@ int main(){
             break;
     }
     return 0;
-
 }
 
 void InitializeGame(game Game){
@@ -69,13 +68,17 @@ void InitializeGame(game Game){
                         {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
                         {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
                         {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
                         {'m', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', 'm'},
                         {'m', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm'},
                         {'m', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm'},
+                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
                         {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
                         {'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'}
+
     };
     Game.lives = 3;
     Game.score = 0;
@@ -382,60 +385,59 @@ void UpdateGame(game Game){
             }
         }
         else{
-            updateClydePosition(Game);
+            updateClydePosition(&Game);
             }
         }
-
     }//fine while
-
-
-
     // Verifica se Pac-Man ha raccolto un punto e aggiorna il punteggio
-
+    if(Game.maze[Game.PacMan.y][Game.PacMan.x] == DOT){
+        Game.score++;
+        Game.maze[Game.PacMan.y][Game.PacMan.x] = ' '
+    }
     // Verifica se Pac-Man è stato catturato da un fantasma
-
-    //Aumentare punteggio
 
     //Togliere vite
 
     //ciliegia!!!!
 }
 
-void updateClydePosition(game game) {
+void updateClydePosition(game *game) {
     srand(time(0));
-    int direction = rand() % 4;
+    int direction;
+    bool validMove = 0;
 
-    switch (direction) {
-        case 0: // Su
-            if (game.maze[game.Clyde.y - 1][game.Clyde.x] != 'm') {
-                game.Clyde.y--;
-            } else {
-                updateClydePosition(game); // Genera una nuova direzione
-            }
-            break;
-        case 1: // Giù
-            if (game.maze[game.Clyde.y + 1][game.Clyde.x] != 'm') {
-                game.Clyde.y++;
-            } else {
-                updateClydePosition(game);
-            }
-            break;
-        case 2: // Sinistra
-            if (game.maze[game.Clyde.y][game.Clyde.x - 1] != 'm') {
-                game.Clyde.x--;
-            } else {
-                updateClydePosition(game);
-            }
-            break;
-        case 3: // Destra
-            if (game.maze[game.Clyde.y][game.Clyde.x + 1] != 'm') {
-                game.Clyde.x++;
-            } else {
-                updateClydePosition(game);
-            }
-            break;
+    while (!validMove) {
+        direction = rand() % 4;
+
+        switch (direction) {
+            case 0: // Su
+                if (game->maze[game->Clyde.y - 1][game->Clyde.x] != 'm') {
+                    game->Clyde.y--;
+                    validMove = 1;
+                }
+                break;
+            case 1: // Giù
+                if (game->maze[game->Clyde.y + 1][game->Clyde.x] != 'm') {
+                    game->Clyde.y++;
+                    validMove = 1;
+                }
+                break;
+            case 2: // Sinistra
+                if (game->maze[game->Clyde.y][game->Clyde.x - 1] != 'm') {
+                    game->Clyde.x--;
+                    validMove = 1;
+                }
+                break;
+            case 3: // Destra
+                if (game->maze[game->Clyde.y][game->Clyde.x + 1] != 'm') {
+                    game->Clyde.x++;
+                    validMove = 1;
+                }
+                break;
+        }
     }
 }
+
 
 #include "game.h"
 #include <stdio.h>
