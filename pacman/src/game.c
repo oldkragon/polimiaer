@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 
-int ShowWindow();
-
 int ShowWindow(){
     if(SDL_Init(SDL_INIT_VIDEO)!=0) {
         printf("Failed to initialize the SDL2 library\n");

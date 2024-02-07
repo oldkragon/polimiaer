@@ -49,6 +49,13 @@ cmake_ninja_workdir = C$:/Users/olthe/Polimi/polimiaer/pacman/cmake-build-debug/
 
 build cmake_object_order_depends_target_pacman: phony || CMakeFiles/pacman.dir
 
+build CMakeFiles/pacman.dir/src/game.c.obj: C_COMPILER__pacman_unscanned_Debug C$:/Users/olthe/Polimi/polimiaer/pacman/src/game.c || cmake_object_order_depends_target_pacman
+  DEP_FILE = CMakeFiles\pacman.dir\src\game.c.obj.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/olthe/Polimi/polimiaer/pacman/include, -IC:/Users/olthe/Polimi/polimiaer/pacman/include -isystem C:/Users/olthe/Polimi/polimiaer/pacman/include/SDL2
+  OBJECT_DIR = CMakeFiles\pacman.dir
+  OBJECT_FILE_DIR = CMakeFiles\pacman.dir\src
+
 build CMakeFiles/pacman.dir/src/main.c.obj: C_COMPILER__pacman_unscanned_Debug C$:/Users/olthe/Polimi/polimiaer/pacman/src/main.c || cmake_object_order_depends_target_pacman
   DEP_FILE = CMakeFiles\pacman.dir\src\main.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
@@ -64,7 +71,7 @@ build CMakeFiles/pacman.dir/src/main.c.obj: C_COMPILER__pacman_unscanned_Debug C
 #############################################
 # Link the executable pacman.exe
 
-build pacman.exe: C_EXECUTABLE_LINKER__pacman_Debug CMakeFiles/pacman.dir/src/main.c.obj | C$:/Users/olthe/Polimi/polimiaer/pacman/lib/libSDL2main.a C$:/Users/olthe/Polimi/polimiaer/pacman/lib/libSDL2.dll.a
+build pacman.exe: C_EXECUTABLE_LINKER__pacman_Debug CMakeFiles/pacman.dir/src/game.c.obj CMakeFiles/pacman.dir/src/main.c.obj | C$:/Users/olthe/Polimi/polimiaer/pacman/lib/libSDL2main.a C$:/Users/olthe/Polimi/polimiaer/pacman/lib/libSDL2.dll.a
   FLAGS = -g
   LINK_FLAGS = -Wl,--undefined=WinMain
   LINK_LIBRARIES = C:/Users/olthe/Polimi/polimiaer/pacman/lib/libSDL2main.a  C:/Users/olthe/Polimi/polimiaer/pacman/lib/libSDL2.dll.a  -mwindows  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
