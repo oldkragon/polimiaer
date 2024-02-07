@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <windows.h>
 #include <math.h>
+#include <time.h>
+#include <stdlib.h>
 
 #define WIDTH 28
 #define HEIGHT 31
@@ -29,6 +31,7 @@ typedef struct{
 
 void InitializeGame(game Game);
 void UpdateGame(game Game);
+void updateClydePosition(game game);
 
 int main(){
     game Game;
@@ -192,7 +195,6 @@ void UpdateGame(game Game){
                 Game.Blinky.x++;
         }
 
-
         if(Game.PacMan.x <= Game.Blinky.x && Game.PacMan.y > Game.Blinky.y){
             if(Game.maze[Game.Blinky.y][Game.Blinky.x-1] != 'm')
                 Game.Blinky.x--;
@@ -202,7 +204,6 @@ void UpdateGame(game Game){
                 Game.Blinky.x++;
             else if(Game.maze[Game.Blinky.y+1][Game.Blinky.x] != 'm')
                 Game.Blinky.y++;
-
         }
         //Pinky tenta di capire dove sarà tra 4 mosse
         position predictedPacManPos = Game.PacMan;
@@ -211,7 +212,6 @@ void UpdateGame(game Game){
             case 'w': {
                 predictedPacManPos.y -= 4;
                 break;
-                }
             }
             case 's': {
                 predictedPacManPos.y += 4;
@@ -276,7 +276,6 @@ void UpdateGame(game Game){
                 Game.Pinky.x++;
         }
 
-
         if(predictedPacManPos.x <= Game.Pinky.x && predictedPacManPos.y > Game.Pinky.y){
             if(Game.maze[Game.Pinky.y][Game.Pinky.x-1] != 'm')
                 Game.Pinky.x--;
@@ -287,10 +286,105 @@ void UpdateGame(game Game){
             else if(Game.maze[Game.Pinky.y+1][Game.Pinky.x] != 'm')
                 Game.Pinky.y++;
         }
+        //Inky mira a una posizione che è due volte la distanza da Blinky alla posizione che sarebbe quattro passi avanti a Pac-Man nella direzione in cui Pac-Man sta attualmente andando
+        position targetPosition;
+        targetPosition.x = 2 * predictedPacManPosition.x - Game.Blinky.x;
+        targetPosition.y = 2 * predictedPacManPosition.y - Game.Blinky.y;
+
+        if(targetPosition.x > Game.Inky.x && targetPosition.y >= Game.Inky.y){
+            if(Game.maze[Game.Inky.y-1][Game.Inky.x] != 'm')
+                Game.Inky.y--;
+            else if(Game.maze[Game.Inky.y][Game.Inky.x+1] != 'm')
+                Game.Inky.x++;
+            else if(Game.maze[Game.Inky.y+1][Game.Inky.x] != 'm')
+                Game.Inky.y++;
+            else if(Game.maze[Game.Inky.y][Game.Inky.x-1] != 'm')
+                Game.Inky.x--;
+        }
+
+        if(targetPosition.x >= Game.Inky.x && targetPosition.y < Game.Inky.y){
+            if(Game.maze[Game.Inky.y][Game.Inky.x+1] != 'm')
+                Game.Inky.x++;
+            else if(Game.maze[Game.Inky.y+1][Game.Inky.x] != 'm')
+                Game.Inky.y++;
+            else if(Game.maze[Game.Inky.y][Game.Inky.x-1] != 'm')
+                Game.Inky.x--;
+            else if(Game.maze[Game.Inky.y-1][Game.Inky.x] != 'm')
+                Game.Inky.y--;
+        }
+
+        if(targetPosition.x < Game.Inky.x && targetPosition.y <= Game.Inky.y){
+            if(Game.maze[Game.Inky.y+1][Game.Inky.x] != 'm')
+                Game.Inky.y++;
+            else if(Game.maze[Game.Inky.y][Game.Inky.x-1] != 'm')
+                Game.Inky.x--;
+            else if(Game.maze[Game.Inky.y-1][Game.Inky.x] != 'm')
+                Game.Inky.y--;
+            else if(Game.maze[Game.Inky.y][Game.Inky.x+1] != 'm')
+                Game.Inky.x++;
+        }
+
+        if(targetPosition.x <= Game.Inky.x && targetPosition.y > Game.Inky.y){
+            if(Game.maze[Game.Inky.y][Game.Inky.x-1] != 'm')
+                Game.Inky.x--;
+            else if(Game.maze[Game.Inky.y-1][Game.Inky.x] != 'm')
+                Game.Inky.y--;
+            else if(Game.maze[Game.Inky.y][Game.Inky.x+1] != 'm')
+                Game.Inky.x++;
+            else if(Game.maze[Game.Inky.y+1][Game.Inky.x] != 'm')
+                Game.Inky.y++;
+
+        }
         //Clyde si muove a caso se si trova ad una distanza <= di 8 celle da Pacman, altrimenti fa come Blinky
+        if(abs(Game.PacMan.x - Game.Clyde.x)>8 && abs(Game.PacMan.y - Game.Clyde.y)>8) {
+            if(Game.PacMan.x > Game.Clyde.x && Game.PacMan.y >= Game.Clyde.y){
+                if(Game.maze[Game.Clyde.y-1][Game.Clyde.x] != 'm')
+                    Game.Clyde.y--;
+                else if(Game.maze[Game.Clyde.y][Game.Clyde.x+1] != 'm')
+                    Game.Clyde.x++;
+                else if(Game.maze[Game.Clyde.y+1][Game.Clyde.x] != 'm')
+                    Game.Clyde.y++;
+                else if(Game.maze[Game.Clyde.y][Game.Clyde.x-1] != 'm')
+                    Game.Clyde.x--;
+            }
 
-        if()
+            if(Game.PacMan.x >= Game.Clyde.x && Game.PacMan.y < Game.Clyde.y){
+                if(Game.maze[Game.Clyde.y][Game.Clyde.x+1] != 'm')
+                    Game.Clyde.x++;
+                else if(Game.maze[Game.Clyde.y+1][Game.Clyde.x] != 'm')
+                    Game.Clyde.y++;
+                else if(Game.maze[Game.Clyde.y][Game.Clyde.x-1] != 'm')
+                    Game.Clyde.x--;
+                else if(Game.maze[Game.Clyde.y-1][Game.Clyde.x] != 'm')
+                    Game.Clyde.y--;
+            }
 
+            if(Game.PacMan.x < Game.Clyde.x && Game.PacMan.y <= Game.Clyde.y){
+                if(Game.maze[Game.Clyde.y+1][Game.Clyde.x] != 'm')
+                    Game.Clyde.y++;
+                else if(Game.maze[Game.Clyde.y][Game.Clyde.x-1] != 'm')
+                    Game.Clyde.x--;
+                else if(Game.maze[Game.Clyde.y-1][Game.Clyde.x] != 'm')
+                    Game.Clyde.y--;
+                else if(Game.maze[Game.Clyde.y][Game.Clyde.x+1] != 'm')
+                    Game.Clyde.x++;
+            }
+
+            if(Game.PacMan.x <= Game.Clyde.x && Game.PacMan.y > Game.Clyde.y){
+                if(Game.maze[Game.Clyde.y][Game.Clyde.x-1] != 'm')
+                    Game.Clyde.x--;
+                else if(Game.maze[Game.Clyde.y-1][Game.Clyde.x] != 'm')
+                    Game.Clyde.y--;
+                else if(Game.maze[Game.Clyde.y][Game.Clyde.x+1] != 'm')
+                    Game.Clyde.x++;
+                else if(Game.maze[Game.Clyde.y+1][Game.Clyde.x] != 'm')
+                    Game.Clyde.y++;
+            }
+        }
+        else{
+            updateClydePosition(Game);
+            }
+        }
 
     }//fine while
 
@@ -307,6 +401,41 @@ void UpdateGame(game Game){
     //ciliegia!!!!
 }
 
+void updateClydePosition(game game) {
+    srand(time(0));
+    int direction = rand() % 4;
+
+    switch (direction) {
+        case 0: // Su
+            if (game.maze[game.Clyde.y - 1][game.Clyde.x] != 'm') {
+                game.Clyde.y--;
+            } else {
+                updateClydePosition(game); // Genera una nuova direzione
+            }
+            break;
+        case 1: // Giù
+            if (game.maze[game.Clyde.y + 1][game.Clyde.x] != 'm') {
+                game.Clyde.y++;
+            } else {
+                updateClydePosition(game);
+            }
+            break;
+        case 2: // Sinistra
+            if (game.maze[game.Clyde.y][game.Clyde.x - 1] != 'm') {
+                game.Clyde.x--;
+            } else {
+                updateClydePosition(game);
+            }
+            break;
+        case 3: // Destra
+            if (game.maze[game.Clyde.y][game.Clyde.x + 1] != 'm') {
+                game.Clyde.x++;
+            } else {
+                updateClydePosition(game);
+            }
+            break;
+    }
+}
 
 #include "game.h"
 #include <stdio.h>
