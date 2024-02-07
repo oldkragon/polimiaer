@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
 
-int main(int argc, char*argv[]) {
+int SDL_main(int argc, char* argv[]) {
     if(SDL_Init(SDL_INIT_VIDEO)<0) {
         printf("Failed to initialize the SDL2 library\n");
         return -1;
