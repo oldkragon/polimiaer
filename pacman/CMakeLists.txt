@@ -11,6 +11,6 @@ find_package(SDL2 REQUIRED)
 include_directories(include, ${SDL2_INCLUDE_DIRS})
 link_directories(lib)
 
-add_executable(pacman src/main.c)
+add_executable(pacman src/game.c src/main.c)
 
 target_link_libraries(pacman ${SDL2_LIBRARIES})
