@@ -245,47 +245,47 @@ void UpdateGame(game Game){
 
         if(predictedPacManPos.x > Game.Pinky.x && predictedPacManPos.y >= Game.Pinky.y){
             if(Game.maze[Game.Blinky.y-1][Game.Blinky.x] != 'm')
-                Game.Blinky.y--;
+                Game.Pinky.y--;
             else if(Game.maze[Game.Blinky.y][Game.Blinky.x+1] != 'm')
-                Game.Blinky.x++;
+                Game.Pinky.x++;
             else if(Game.maze[Game.Blinky.y+1][Game.Blinky.x] != 'm')
-                Game.Blinky.y++;
+                Game.Pinky.y++;
             else if(Game.maze[Game.Blinky.y][Game.Blinky.x-1] != 'm')
-                Game.Blinky.x--;
+                Game.Pinky.x--;
         }
 
         if(predictedPacManPos.x >= Game.Pinky.x && predictedPacManPos.y < Game.Pinky.y){
             if(Game.maze[Game.Blinky.y][Game.Blinky.x+1] != 'm')
-                Game.Blinky.x++;
+                Game.Pinky.x++;
             else if(Game.maze[Game.Blinky.y+1][Game.Blinky.x] != 'm')
-                Game.Blinky.y++;
+                Game.Pinky.y++;
             else if(Game.maze[Game.Blinky.y][Game.Blinky.x-1] != 'm')
-                Game.Blinky.x--;
+                Game.Pinky.x--;
             else if(Game.maze[Game.Blinky.y-1][Game.Blinky.x] != 'm')
-                Game.Blinky.y--;
+                Game.Pinky.y--;
         }
 
         if(predictedPacManPos.x < Game.Pinky.x && predictedPacManPos.y <= Game.Pinky.y){
             if(Game.maze[Game.Blinky.y+1][Game.Blinky.x] != 'm')
-                Game.Blinky.y++;
+                Game.Pinky.y++;
             else if(Game.maze[Game.Blinky.y][Game.Blinky.x-1] != 'm')
-                Game.Blinky.x--;
+                Game.Pinky.x--;
             else if(Game.maze[Game.Blinky.y-1][Game.Blinky.x] != 'm')
-                Game.Blinky.y--;
+                Game.Pinky.y--;
             else if(Game.maze[Game.Blinky.y][Game.Blinky.x+1] != 'm')
-                Game.Blinky.x++;
+                Game.Pinky.x++;
         }
 
 
         if(predictedPacManPos.x <= Game.Pinky.x && predictedPacManPos.y > Game.Pinky.y){
             if(Game.maze[Game.Blinky.y][Game.Blinky.x-1] != 'm')
-                Game.Blinky.x--;
+                Game.Pinky.x--;
             else if(Game.maze[Game.Blinky.y-1][Game.Blinky.x] != 'm')
-                Game.Blinky.y--;
+                Game.Pinky.y--;
             else if(Game.maze[Game.Blinky.y][Game.Blinky.x+1] != 'm')
-                Game.Blinky.x++;
+                Game.Pinky.x++;
             else if(Game.maze[Game.Blinky.y+1][Game.Blinky.x] != 'm')
-                Game.Blinky.y++;
+                Game.Pinky.y++;
         }
 
 
