@@ -11,6 +11,7 @@
 #define DOT '.'
 #define PACMAN 'p'
 #define GHOST 'g'
+#define CHERRY 'c'
 
 typedef struct {
     int x;
@@ -24,14 +25,17 @@ typedef struct{
     position Inky;
     position Clyde;
     position PacMan;
+    position Cherry
     int lives;
     int score;
     int moveCounter;
+    int countDots
 }game;
 
 void InitializeGame(game Game);
 void UpdateGame(game Game);
 void updateClydePosition(game game);
+void spawnCherry()
 
 int main(){
     game Game;
@@ -89,20 +93,29 @@ void InitializeGame(game Game){
         }
     }
 
+    Game.countDots = 0;
+
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            if(InitialMaze[i][j] == '.')
+            Game.countDots++;
+        }
+    }
+
     Game.Pinky.x = 14;
-    Game.Pinky.y = 16;
+    Game.Pinky.y = 14;
 
     Game.Blinky.x = 14;
-    Game.Blinky.y = 16;
+    Game.Blinky.y = 14;
 
-    Game.Inky.x = 15;
-    Game.Inky.y = 16;
+    Game.Inky.x = 14;
+    Game.Inky.y = 14;
 
-    Game.Clyde.x = 15;
-    Game.Clyde.y = 16;
+    Game.Clyde.x = 14;
+    Game.Clyde.y = 14;
 
     Game.PacMan.x = 15;
-    Game.PacMan.y = 16;
+    Game.PacMan.y = 14;
 
     Game.moveCounter = 0;
 }
@@ -161,7 +174,7 @@ void UpdateGame(game Game){
         }
     }
 
-    Game.moveCounter ++;
+    Game.moveCounter++;
 
     while (Game.moveCounter > 7){
         //Blinky lo segue diretto - parte 7 mosse dopo
@@ -384,21 +397,31 @@ void UpdateGame(game Game){
                     Game.Clyde.y++;
             }
         }
-        else{
-            updateClydePosition(&Game);
-            }
-        }
+        else updateClydePosition(&Game);
     }//fine while
-    // Verifica se Pac-Man ha raccolto un punto e aggiorna il punteggio
+    // Verifica se Pac-Man ha raccolto un punto e aggiorna il punteggio + se tutti i puntini sono spariti rimettere i puntini
     if(Game.maze[Game.PacMan.y][Game.PacMan.x] == DOT){
         Game.score++;
-        Game.maze[Game.PacMan.y][Game.PacMan.x] = ' '
+        Game.maze[Game.PacMan.y][Game.PacMan.x] = ' ';
+        Game.countDots--;
+        if(Game.countDots == 0){
+            for (int i = 0; i < HEIGHT; i++) {
+                for (int j = 0; j < WIDTH; j++) {
+                    if(Game.maze[i][j] == ' ')
+                        Game.maze[i][j] == '.';
+                }
+            }
+        }
     }
+    //ciliegia
+    if(Game.score == 70 || Game.score == 170){
+        spawnCherry(&Game);
+    }
+
     // Verifica se Pac-Man è stato catturato da un fantasma
 
     //Togliere vite
 
-    //ciliegia!!!!
 }
 
 void updateClydePosition(game *game) {
@@ -438,6 +461,12 @@ void updateClydePosition(game *game) {
     }
 }
 
+void spawnCherry(game *Game) {
+    cherryActive = 1;
+    cherrySpawnTime = time(NULL);//tempo in cui compare la ciliegia
+    Game.Cherry.y = 17;
+    Game.Cherry.x = 15;
+}
 
 #include "game.h"
 #include <stdio.h>
