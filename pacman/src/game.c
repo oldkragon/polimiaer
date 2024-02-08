@@ -9,6 +9,7 @@
 #define WIDTH 28
 #define HEIGHT 31
 #define CELL_SIZE 20
+#define CHERRY_POINTS 50
 #define WALL 'm'
 #define EMPTY ' '
 #define DOT '.'
@@ -30,6 +31,13 @@
     }
     return 0;
 }*/
+void updateClydePosition(game *game);
+void updateInkyPosition(game *game);
+void updatePinkyPosition(game *game);
+void updateBlinkyPosition(game *game);
+void InitializeGame(game Game);
+void UpdateGame(game Game);
+void spawnCherry(game *Game);
 
 void InitializeGame(game Game){
     char InitialMaze[WIDTH][HEIGHT] = {{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
@@ -395,8 +403,38 @@ void UpdateGame(game Game){
         }
     }
     //ciliegia
-    if(Game.score == 70 || Game.score == 170){
+    if(Game.score == 70 || Game.score == 170) {
         spawnCherry(&Game);
+    }
+
+    if(cherryActive == 1){
+        currTime = time(NULL);
+        if(difftime(currTime, cherrySpawnTime)>=10){
+            cherryActive = 0;
+        }
+    }
+
+    int pacmanActive = 0;  //stato di Pac-Man (0 = normale, 1 = potenziato)
+    time_t powerupStartTime;  //Pac-Man mangia una ciliegia
+
+    if(cherryActive == 1 && Game.maze[Game.PacMan.y][Game.PacMan.x] == CHERRY) {
+        pacmanActive = 1;
+        Game.score += CHERRY_POINTS;
+        powerupStartTime = time(NULL);  //tempo corrente
+    }
+
+    if (pacmanActive == 1) {
+        time_t currentTime = time(NULL);
+        if (difftime(currentTime, powerupStartTime) >= 15) {
+            pacmanActive = 0;  //fine stato potenziato
+        }
+    }
+
+    while (pacmanActive == 1){
+        updateClydePosition(&Game);
+        updateInkyPosition(&Game);
+        updateBlinkyPosition(&Game);
+        updatePinkyPosition(&Game);
     }
 
     // Verifica se Pac-Man è stato catturato da un fantasma
@@ -415,26 +453,137 @@ void updateClydePosition(game *game) {
 
         switch (direction) {
             case 0: // Su
-                if (game->maze[game->Clyde.y - 1][game->Clyde.x] != 'm') {
-                    game->Clyde.y--;
+                if (game.maze[game.Clyde.y - 1][game.Clyde.x] != 'm') {
+                    game.Clyde.y--;
                     validMove = 1;
                 }
                 break;
             case 1: // Giù
-                if (game->maze[game->Clyde.y + 1][game->Clyde.x] != 'm') {
-                    game->Clyde.y++;
+                if (game.maze[game.Clyde.y + 1][game.Clyde.x] != 'm') {
+                    game.Clyde.y++;
                     validMove = 1;
                 }
                 break;
             case 2: // Sinistra
-                if (game->maze[game->Clyde.y][game->Clyde.x - 1] != 'm') {
-                    game->Clyde.x--;
+                if (game.maze[game.Clyde.y][game.Clyde.x - 1] != 'm') {
+                    game.Clyde.x--;
                     validMove = 1;
                 }
                 break;
             case 3: // Destra
-                if (game->maze[game->Clyde.y][game->Clyde.x + 1] != 'm') {
-                    game->Clyde.x++;
+                if (game.maze[game.Clyde.y][game.Clyde.x + 1] != 'm') {
+                    game.Clyde.x++;
+                    validMove = 1;
+                }
+                break;
+        }
+    }
+}
+
+void updateInkyPosition(game *game) {
+    srand(time(0));
+    int direction;
+    int validMove = 0;
+
+    while (!validMove) {
+        direction = rand() % 4;
+
+        switch (direction) {
+            case 0: // Su
+                if (game.maze[game.Inky.y - 1][game.Inky.x] != 'm') {
+                    game.Inky.y--;
+                    validMove = 1;
+                }
+                break;
+            case 1: // Giù
+                if (game.maze[game.Inky.y + 1][game.Inky.x] != 'm') {
+                    game.Inky.y++;
+                    validMove = 1;
+                }
+                break;
+            case 2: // Sinistra
+                if (game.maze[game.Inky.y][game.Inky.x - 1] != 'm') {
+                    game.Inky.x--;
+                    validMove = 1;
+                }
+                break;
+            case 3: // Destra
+                if (game.maze[game.Inky.y][game.Inky.x + 1] != 'm') {
+                    game.Inky.x++;
+                    validMove = 1;
+                }
+                break;
+        }
+    }
+}
+
+void updatePinkyPosition(game *game) {
+    srand(time(0));
+    int direction;
+    int validMove = 0;
+
+    while (!validMove) {
+        direction = rand() % 4;
+
+        switch (direction) {
+            case 0: // Su
+                if (game.maze[game.Pinky.y - 1][game.Pinky.x] != 'm') {
+                    game.Pinky.y--;
+                    validMove = 1;
+                }
+                break;
+            case 1: // Giù
+                if (game.maze[game.Pinky.y + 1][game.Pinky.x] != 'm') {
+                    game.Pinky.y++;
+                    validMove = 1;
+                }
+                break;
+            case 2: // Sinistra
+                if (game.maze[game.Pinky.y][game.Pinky.x - 1] != 'm') {
+                    game.Pinky.x--;
+                    validMove = 1;
+                }
+                break;
+            case 3: // Destra
+                if (game.maze[game.Pinky.y][game.Pinky.x + 1] != 'm') {
+                    game.Pinky.x++;
+                    validMove = 1;
+                }
+                break;
+        }
+    }
+}
+
+void updateBlinkyPosition(game *game) {
+    srand(time(0));
+    int direction;
+    int validMove = 0;
+
+    while (!validMove) {
+        direction = rand() % 4;
+
+        switch (direction) {
+            case 0: // Su
+                if (game.maze[game.Blinky.y - 1][game.Blinky.x] != 'm') {
+                    game.Blinky.y--;
+                    validMove = 1;
+                }
+                break;
+            case 1: // Giù
+                if (game.maze[game.Blinky.y + 1][game.Blinky.x] != 'm') {
+                    game.Blinky.y++;
+                    validMove = 1;
+                }
+                break;
+            case 2: // Sinistra
+                if (game.maze[game.Blinky.y][game.Blinky.x - 1] != 'm') {
+                    game.Blinky.x--;
+                    validMove = 1;
+                }
+                break;
+            case 3: // Destra
+                if (game.maze[game.Blinky.y][game.Blinky.x + 1] != 'm') {
+                    game.Blinky.x++;
                     validMove = 1;
                 }
                 break;
@@ -443,8 +592,8 @@ void updateClydePosition(game *game) {
 }
 
 void spawnCherry(game *Game) {
-    int cherryActive = 1;
-    int cherrySpawnTime = time(NULL);//tempo in cui compare la ciliegia
+    cherryActive = 1;
+    cherrySpawnTime = time(NULL);//tempo in cui compare la ciliegia
     Game->Cherry.y = 17;
     Game->Cherry.x = 15;
 }
