@@ -10,6 +10,7 @@
 #define HEIGHT 31
 #define CELL_SIZE 20
 #define CHERRY_POINTS 50
+#define BONUS_POINTS 50
 #define WALL 'm'
 #define EMPTY ' '
 #define DOT '.'
@@ -38,9 +39,14 @@ void updateBlinkyPosition(game *game);
 void InitializeGame(game Game);
 void UpdateGame(game Game);
 void spawnCherry(game *Game);
+void resetPacManPosition(game *Game);
+void resetPinkyPosition(game *Game);
+void resetInkyPosition(game *Game);
+void resetBlinkyPosition(game *Game);
+void resetClydePosition(game *Game);
 
 void InitializeGame(game Game){
-    char InitialMaze[WIDTH][HEIGHT] = {{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
+    char InitialMaze[HEIGHT][WIDTH] = {{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
                         {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.' ,'.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
                         {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
                         {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
@@ -436,11 +442,93 @@ void UpdateGame(game Game){
         updateBlinkyPosition(&Game);
         updatePinkyPosition(&Game);
     }
-
     // Verifica se Pac-Man è stato catturato da un fantasma
+    if (Game.PacMan.x == Game.Clyde.x && Game.PacMan.y == Game.Clyde.y) {
+        if (pacmanActive==1) {
+            // Pacman mangia il fantasma
+            Game.score += BONUS_POINTS;
+            resetClydePosition(&Game.Clyde);
+        } else {
+            // Pacman perde una vita
+            Game.lives--;
+            if (Game.lives == 0) {
+                endGame();
+            } else {
+                resetPacManPosition(&Game.PacMan);
+                resetClydePosition(&Game.Clyde);
+            }
+        }
+    }
 
+    if (Game.PacMan.x == Game.Pinky.x && Game.PacMan.y == Game.Pinky.y){
+        if (pacmanActive==1) {
+            Game.score += BONUS_POINTS;
+            resetPinkyPosition(&Game.Pinky);
+        } else {
+            Game.lives--;
+            if (Game.lives == 0) {
+                endGame();
+            } else {
+                resetPacManPosition(&Game.PacMan);
+                resetPinkyPosition(&Game.Pinky);
+            }
+        }
+    }
+
+    if (Game.PacMan.x == Game.Inky.x && Game.PacMan.y == Game.Inky.y) {
+        if (pacmanActive==1) {
+            Game.score += BONUS_POINTS;
+            resetInkyPosition(&Game.Inky);
+        } else {
+            Game.lives--;
+            if (Game.lives == 0) {
+                endGame();
+            } else {
+                resetPacManPosition(&Game.PacMan);
+                resetInkyPosition(&Game.Inky);
+            }
+        }
+    }
+
+    if (Game.PacMan.x == Game.Blinky.x && Game.PacMan.y == Game.Blinky.y) {
+        if (pacmanActive==1) {
+            Game.score += BONUS_POINTS;
+            resetBlinkyPosition(&Game.Blinky);
+        } else {
+            Game.lives--;
+            if (Game.lives == 0) {
+                endGame();
+            } else {
+                resetPacManPosition(&Game.PacMan);
+                resetBlinkyPosition(&Game.Blinky);
+            }
+        }
+    }
     //Togliere vite
+}
 
+
+void resetPacManPosition(game *Game){
+    Game.PacMan.x = 15;
+    Game.PacMan.y = 14;
+}
+void resetPinkyPosition(game *Game){
+    Game.Pinky.x = 14;
+    Game.Pinky.y = 14;
+
+}
+void resetInkyPosition(game *Game){
+    Game.Inky.x = 14;
+    Game.Inky.y = 14;
+
+}
+void resetBlinkyPosition(game *Game){
+    Game.Blinky.x = 14;
+    Game.Blinky.y = 14;
+}
+void resetClydePosition(game *Game){
+    Game.Clyde.x = 14;
+    Game.Clyde.y = 14;
 }
 
 void updateClydePosition(game *game) {
