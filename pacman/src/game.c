@@ -3,9 +3,12 @@
 #include <math.h>
 #include <time.h>
 #include <stdlib.h>
+#include "game.h"
+#include <SDL2/SDL.h>
 
 #define WIDTH 28
 #define HEIGHT 31
+#define CELL_SIZE 20
 #define WALL 'm'
 #define EMPTY ' '
 #define DOT '.'
@@ -13,45 +16,23 @@
 #define GHOST 'g'
 #define CHERRY 'c'
 
-typedef struct {
-    int x;
-    int y;
-} position;
+//colorscheme pacman FFFF00 bg 1919A6 walls 2121DE
 
-typedef struct{
-    char maze[HEIGHT][WIDTH];
-    position Pinky;
-    position Blinky;
-    position Inky;
-    position Clyde;
-    position PacMan;
-    position Cherry
-    int lives;
-    int score;
-    int moveCounter;
-    int countDots
-}game;
-
-void InitializeGame(game Game);
-void UpdateGame(game Game);
-void updateClydePosition(game game);
-void spawnCherry()
-
-int main(){
+/*int main(){
     game Game;
 
     InitializeGame(Game);
 
     while (1){
         UpdateGame(Game);
-        if (game.lives == 0)
+        if (Game.lives == 0)
             break;
     }
     return 0;
-}
+}*/
 
 void InitializeGame(game Game){
-    char InitialMaze = {{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
+    char InitialMaze[WIDTH][HEIGHT] = {{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
                         {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.' ,'.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
                         {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
                         {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
@@ -89,7 +70,7 @@ void InitializeGame(game Game){
 
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            Game.maze[i][j] = InitialMaze
+            Game.maze[i][j] = InitialMaze;
         }
     }
 
@@ -125,49 +106,49 @@ void UpdateGame(game Game){
 //aggiorna la posizione di pacman in base all'input
     switch (input){
         case 'w': {
-            if(maze[Game.PacMan.y-1][Game.PacMan.x] != 'm') {
+            if(Game.maze[Game.PacMan.y-1][Game.PacMan.x] != 'm') {
                 Game.PacMan.y--;
                 break;
             }
         }
         case 's': {
-            if(maze[Game.PacMan.y+1][Game.PacMan.x] != 'm') {
+            if(Game.maze[Game.PacMan.y+1][Game.PacMan.x] != 'm') {
                 Game.PacMan.y++;
                 break;
             }
         }
         case 'a': {
-            if(maze[Game.PacMan.y][Game.PacMan.x-1] != 'm') {
+            if(Game.maze[Game.PacMan.y][Game.PacMan.x-1] != 'm') {
                 Game.PacMan.x--;
                 break;
             }
         }
         case 'd': {
-            if(maze[Game.PacMan.y][Game.PacMan.x+1] != 'm') {
+            if(Game.maze[Game.PacMan.y][Game.PacMan.x+1] != 'm') {
                 Game.PacMan.x++;
                 break;
             }
         }
         case (GetAsyncKeyState(VK_UP)): {
-            if(maze[Game.PacMan.y-1][Game.PacMan.x] != 'm') {
+            if(Game.maze[Game.PacMan.y-1][Game.PacMan.x] != 'm') {
                 Game.PacMan.y--;
                 break;
             }
         }
         case (GetAsyncKeyState(VK_DOWN)): {
-            if(maze[Game.PacMan.y+1][Game.PacMan.x] != 'm') {
+            if(Game.maze[Game.PacMan.y+1][Game.PacMan.x] != 'm') {
                 Game.PacMan.y++;
                 break;
             }
         }
         case (GetAsyncKeyState(VK_LEFT)): {
-            if(maze[Game.PacMan.y][Game.PacMan.x-1] != 'm') {
+            if(Game.maze[Game.PacMan.y][Game.PacMan.x-1] != 'm') {
                 Game.PacMan.x--;
                 break;
             }
         }
         case (GetAsyncKeyState(VK_RIGHT)): {
-            if(maze[Game.PacMan.y][Game.PacMan.x+1] != 'm') {
+            if(Game.maze[Game.PacMan.y][Game.PacMan.x+1] != 'm') {
                 Game.PacMan.x++;
                 break;
             }
@@ -304,8 +285,8 @@ void UpdateGame(game Game){
         }
         //Inky mira a una posizione che è due volte la distanza da Blinky alla posizione che sarebbe quattro passi avanti a Pac-Man nella direzione in cui Pac-Man sta attualmente andando
         position targetPosition;
-        targetPosition.x = 2 * predictedPacManPosition.x - Game.Blinky.x;
-        targetPosition.y = 2 * predictedPacManPosition.y - Game.Blinky.y;
+        targetPosition.x = 2 * predictedPacManPos.x - Game.Blinky.x;
+        targetPosition.y = 2 * predictedPacManPos.y - Game.Blinky.y;
 
         if(targetPosition.x > Game.Inky.x && targetPosition.y >= Game.Inky.y){
             if(Game.maze[Game.Inky.y-1][Game.Inky.x] != 'm')
@@ -351,7 +332,7 @@ void UpdateGame(game Game){
                 Game.Inky.y++;
 
         }
-        //Clyde si muove a caso se si trova ad una distanza <= di 8 celle da Pacman, altrimenti fa come Blinky
+        //Clyde si muove a caso se si trova a una distanza <= di 8 celle da Pacman, altrimenti fa come Blinky
         if(abs(Game.PacMan.x - Game.Clyde.x)>8 && abs(Game.PacMan.y - Game.Clyde.y)>8) {
             if(Game.PacMan.x > Game.Clyde.x && Game.PacMan.y >= Game.Clyde.y){
                 if(Game.maze[Game.Clyde.y-1][Game.Clyde.x] != 'm')
@@ -408,7 +389,7 @@ void UpdateGame(game Game){
             for (int i = 0; i < HEIGHT; i++) {
                 for (int j = 0; j < WIDTH; j++) {
                     if(Game.maze[i][j] == ' ')
-                        Game.maze[i][j] == '.';
+                        Game.maze[i][j] = '.';
                 }
             }
         }
@@ -427,7 +408,7 @@ void UpdateGame(game Game){
 void updateClydePosition(game *game) {
     srand(time(0));
     int direction;
-    bool validMove = 0;
+    int validMove = 0;
 
     while (!validMove) {
         direction = rand() % 4;
@@ -462,22 +443,15 @@ void updateClydePosition(game *game) {
 }
 
 void spawnCherry(game *Game) {
-    cherryActive = 1;
-    cherrySpawnTime = time(NULL);//tempo in cui compare la ciliegia
-    Game.Cherry.y = 17;
-    Game.Cherry.x = 15;
+    int cherryActive = 1;
+    int cherrySpawnTime = time(NULL);//tempo in cui compare la ciliegia
+    Game->Cherry.y = 17;
+    Game->Cherry.x = 15;
 }
 
-#include "game.h"
-#include <stdio.h>
-#include <SDL2/SDL.h>
 
-#define WIDTH 31
-#define HEIGHT 28
-#define CELL_SIZE 20
-//colorscheme pacman FFFF00 bg 1919A6 walls 2121DE
 
-extern char maze[WIDTH][HEIGHT];
+extern char maze[HEIGHT][WIDTH];
 
 void ShowMaze(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, 25, 25, 166, 255);
@@ -493,22 +467,4 @@ void ShowMaze(SDL_Renderer *renderer) {
         }
     }
     SDL_RenderPresent(renderer);
-}
-int ShowWindow(){
-    if(SDL_Init(SDL_INIT_VIDEO)!=0) {
-        printf("Failed to initialize the SDL2 library\n");
-        printf("SDL_Init Error: %s\n", SDL_GetError());
-        return -1;
-    }
-    SDL_Window *window = SDL_CreateWindow("SDL2 Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 900, 600, SDL_WINDOW_SHOWN);
-    if(window==NULL) {
-        printf("Failed to create window\n");
-        printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
-        SDL_Quit();
-        return -1;
-    }
-    SDL_Delay(3000);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-    return 0;
 }
