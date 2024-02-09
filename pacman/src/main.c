@@ -17,7 +17,7 @@ int SDL_main(int argc, char* argv[]) {
         return -1;
     }
     game Game;
-    InitializeGame(Game);
+    InitializeGame(&Game);
     SDL_Event event;
 
     while (running) {
@@ -25,7 +25,7 @@ int SDL_main(int argc, char* argv[]) {
             if (event.type == SDL_QUIT) {
                 running = 0;
             }
-            UpdateGame(Game);
+            UpdateGame(&Game);
             ShowMaze(renderer);
         }
     }

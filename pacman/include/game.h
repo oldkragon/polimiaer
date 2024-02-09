@@ -29,8 +29,8 @@ typedef struct{
 }game;
 
 void ShowMaze(SDL_Renderer *renderer);
-void InitializeGame(game Game);
-void UpdateGame(game Game);
+void InitializeGame(game *Game);
+void UpdateGame(game *Game);
 void updateClydePosition(game *Game);
 void spawnCherry(game *Game);
 void updateInkyPosition(game *game);
