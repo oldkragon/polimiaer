@@ -9,6 +9,8 @@
 #define WIDTH 28
 #define HEIGHT 31
 #define CELL_SIZE 20
+#define CHERRY_POINTS 50
+#define BONUS_POINTS 50
 #define WALL 'm'
 #define EMPTY ' '
 #define DOT '.'
@@ -30,9 +32,21 @@
     }
     return 0;
 }*/
+void updateClydePosition(game *game);
+void updateInkyPosition(game *game);
+void updatePinkyPosition(game *game);
+void updateBlinkyPosition(game *game);
+void InitializeGame(game Game);
+void UpdateGame(game Game);
+void spawnCherry(game *Game);
+void resetPacManPosition(game *Game);
+void resetPinkyPosition(game *Game);
+void resetInkyPosition(game *Game);
+void resetBlinkyPosition(game *Game);
+void resetClydePosition(game *Game);
 
 void InitializeGame(game Game){
-    char InitialMaze[WIDTH][HEIGHT] = {{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
+    char InitialMaze[HEIGHT][WIDTH] = {{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
                         {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.' ,'.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
                         {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
                         {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
@@ -395,19 +409,206 @@ void UpdateGame(game Game){
         }
     }
     //ciliegia
-    if(Game.score == 70 || Game.score == 170){
+    if(Game.score == 70 || Game.score == 170) {
         spawnCherry(&Game);
     }
 
+    if(cherryActive == 1){
+        currTime = time(NULL);
+        if(difftime(currTime, cherrySpawnTime)>=10){
+            cherryActive = 0;
+        }
+    }
+
+    int pacmanActive = 0;  //stato di Pac-Man (0 = normale, 1 = potenziato)
+    time_t powerupStartTime;  //Pac-Man mangia una ciliegia
+
+    if(cherryActive == 1 && Game.maze[Game.PacMan.y][Game.PacMan.x] == CHERRY) {
+        pacmanActive = 1;
+        Game.score += CHERRY_POINTS;
+        powerupStartTime = time(NULL);  //tempo corrente
+    }
+
+    if (pacmanActive == 1) {
+        time_t currentTime = time(NULL);
+        if (difftime(currentTime, powerupStartTime) >= 15) {
+            pacmanActive = 0;  //fine stato potenziato
+        }
+    }
+
+    while (pacmanActive == 1){
+        updateClydePosition(&Game);
+        updateInkyPosition(&Game);
+        updateBlinkyPosition(&Game);
+        updatePinkyPosition(&Game);
+    }
     // Verifica se Pac-Man è stato catturato da un fantasma
+    if (Game.PacMan.x == Game.Clyde.x && Game.PacMan.y == Game.Clyde.y) {
+        if (pacmanActive==1) {
+            // Pacman mangia il fantasma
+            Game.score += BONUS_POINTS;
+            resetClydePosition(&Game.Clyde);
+        } else {
+            // Pacman perde una vita
+            Game.lives--;
+            if (Game.lives == 0) {
+                endGame();
+            } else {
+                resetPacManPosition(&Game.PacMan);
+                resetClydePosition(&Game.Clyde);
+            }
+        }
+    }
 
+    if (Game.PacMan.x == Game.Pinky.x && Game.PacMan.y == Game.Pinky.y){
+        if (pacmanActive==1) {
+            Game.score += BONUS_POINTS;
+            resetPinkyPosition(&Game.Pinky);
+        } else {
+            Game.lives--;
+            if (Game.lives == 0) {
+                endGame();
+            } else {
+                resetPacManPosition(&Game.PacMan);
+                resetPinkyPosition(&Game.Pinky);
+            }
+        }
+    }
+
+    if (Game.PacMan.x == Game.Inky.x && Game.PacMan.y == Game.Inky.y) {
+        if (pacmanActive==1) {
+            Game.score += BONUS_POINTS;
+            resetInkyPosition(&Game.Inky);
+        } else {
+            Game.lives--;
+            if (Game.lives == 0) {
+                endGame();
+            } else {
+                resetPacManPosition(&Game.PacMan);
+                resetInkyPosition(&Game.Inky);
+            }
+        }
+    }
+
+    if (Game.PacMan.x == Game.Blinky.x && Game.PacMan.y == Game.Blinky.y) {
+        if (pacmanActive==1) {
+            Game.score += BONUS_POINTS;
+            resetBlinkyPosition(&Game.Blinky);
+        } else {
+            Game.lives--;
+            if (Game.lives == 0) {
+                endGame();
+            } else {
+                resetPacManPosition(&Game.PacMan);
+                resetBlinkyPosition(&Game.Blinky);
+            }
+        }
+    }
     //Togliere vite
+}
 
+
+void resetPacManPosition(game *Game){
+    Game.PacMan.x = 15;
+    Game.PacMan.y = 14;
+}
+void resetPinkyPosition(game *Game){
+    Game.Pinky.x = 14;
+    Game.Pinky.y = 14;
+
+}
+void resetInkyPosition(game *Game){
+    Game.Inky.x = 14;
+    Game.Inky.y = 14;
+
+}
+void resetBlinkyPosition(game *Game){
+    Game.Blinky.x = 14;
+    Game.Blinky.y = 14;
+}
+void resetClydePosition(game *Game){
+    Game.Clyde.x = 14;
+    Game.Clyde.y = 14;
 }
 
 void updateClydePosition(game *game) {
     srand(time(0));
     int direction;
+    int validMove = 0;
+
+    while (!validMove) {
+        direction = rand() % 4;
+
+        switch (direction) {
+            case 0: // Su
+                if (game.maze[game.Clyde.y - 1][game.Clyde.x] != 'm') {
+                    game.Clyde.y--;
+                    validMove = 1;
+                }
+                break;
+            case 1: // Giù
+                if (game.maze[game.Clyde.y + 1][game.Clyde.x] != 'm') {
+                    game.Clyde.y++;
+                    validMove = 1;
+                }
+                break;
+            case 2: // Sinistra
+                if (game.maze[game.Clyde.y][game.Clyde.x - 1] != 'm') {
+                    game.Clyde.x--;
+                    validMove = 1;
+                }
+                break;
+            case 3: // Destra
+                if (game.maze[game.Clyde.y][game.Clyde.x + 1] != 'm') {
+                    game.Clyde.x++;
+                    validMove = 1;
+                }
+                break;
+        }
+    }
+}
+
+void updateInkyPosition(game *game) {
+    srand(time(0));
+    int direction;
+    int validMove = 0;
+
+    while (!validMove) {
+        direction = rand() % 4;
+
+        switch (direction) {
+            case 0: // Su
+                if (game.maze[game.Inky.y - 1][game.Inky.x] != 'm') {
+                    game.Inky.y--;
+                    validMove = 1;
+                }
+                break;
+            case 1: // Giù
+                if (game.maze[game.Inky.y + 1][game.Inky.x] != 'm') {
+                    game.Inky.y++;
+                    validMove = 1;
+                }
+                break;
+            case 2: // Sinistra
+                if (game.maze[game.Inky.y][game.Inky.x - 1] != 'm') {
+                    game.Inky.x--;
+                    validMove = 1;
+                }
+                break;
+            case 3: // Destra
+                if (game.maze[game.Inky.y][game.Inky.x + 1] != 'm') {
+                    game.Inky.x++;
+                    validMove = 1;
+                }
+                break;
+        }
+    }
+}
+
+void updatePinkyPosition(game *game) {
+    srand(time(0));
+    int direction;
+    int validMove = 0;
     int validMove = 0;
 
     while (!validMove) {
@@ -433,8 +634,45 @@ void updateClydePosition(game *game) {
                 }
                 break;
             case 3: // Destra
-                if (game->maze[game->Clyde.y][game->Clyde.x + 1] != 'm') {
-                    game->Clyde.x++;
+                if (game.maze[game.Pinky.y][game.Pinky.x + 1] != 'm') {
+                    game.Pinky.x++;
+                    validMove = 1;
+                }
+                break;
+        }
+    }
+}
+
+void updateBlinkyPosition(game *game) {
+    srand(time(0));
+    int direction;
+    int validMove = 0;
+
+    while (!validMove) {
+        direction = rand() % 4;
+
+        switch (direction) {
+            case 0: // Su
+                if (game.maze[game.Blinky.y - 1][game.Blinky.x] != 'm') {
+                    game.Blinky.y--;
+                    validMove = 1;
+                }
+                break;
+            case 1: // Giù
+                if (game.maze[game.Blinky.y + 1][game.Blinky.x] != 'm') {
+                    game.Blinky.y++;
+                    validMove = 1;
+                }
+                break;
+            case 2: // Sinistra
+                if (game.maze[game.Blinky.y][game.Blinky.x - 1] != 'm') {
+                    game.Blinky.x--;
+                    validMove = 1;
+                }
+                break;
+            case 3: // Destra
+                if (game.maze[game.Blinky.y][game.Blinky.x + 1] != 'm') {
+                    game.Blinky.x++;
                     validMove = 1;
                 }
                 break;
