@@ -32,13 +32,9 @@
     }
     return 0;
 }*/
-void updateClydePosition(game *game);
 void updateInkyPosition(game *game);
 void updatePinkyPosition(game *game);
 void updateBlinkyPosition(game *game);
-void InitializeGame(game Game);
-void UpdateGame(game Game);
-void spawnCherry(game *Game);
 void resetPacManPosition(game *Game);
 void resetPinkyPosition(game *Game);
 void resetInkyPosition(game *Game);
@@ -118,6 +114,7 @@ void InitializeGame(game Game){
 void UpdateGame(game Game){
     char input;
     int cherryActive = 0;
+    int cherrySpawnTime;
 //aggiorna la posizione di pacman in base all'input
     switch (input){
         case 'w': {
@@ -411,7 +408,7 @@ void UpdateGame(game Game){
     }
     //ciliegia
     if(Game.score == 70 || Game.score == 170) {
-        spawnCherry(&Game);
+        spawnCherry(&Game, cherryActive, cherrySpawnTime);
     }
 
     if(cherryActive == 1){
@@ -453,7 +450,7 @@ void UpdateGame(game Game){
             // Pacman perde una vita
             Game.lives--;
             if (Game.lives == 0) {
-                endGame();
+                //endGame();
             } else {
                 resetPacManPosition(&Game.PacMan);
                 resetClydePosition(&Game.Clyde);
@@ -468,7 +465,7 @@ void UpdateGame(game Game){
         } else {
             Game.lives--;
             if (Game.lives == 0) {
-                endGame();
+                //endGame();
             } else {
                 resetPacManPosition(&Game.PacMan);
                 resetPinkyPosition(&Game.Pinky);
@@ -483,7 +480,7 @@ void UpdateGame(game Game){
         } else {
             Game.lives--;
             if (Game.lives == 0) {
-                endGame();
+                //endGame();
             } else {
                 resetPacManPosition(&Game.PacMan);
                 resetInkyPosition(&Game.Inky);
@@ -498,7 +495,7 @@ void UpdateGame(game Game){
         } else {
             Game.lives--;
             if (Game.lives == 0) {
-                endGame();
+                //endGame();
             } else {
                 resetPacManPosition(&Game.PacMan);
                 resetBlinkyPosition(&Game.Blinky);
@@ -680,9 +677,9 @@ void updateBlinkyPosition(game *game) {
     }
 }
 
-void spawnCherry(game *Game) {
-    int cherryActive = 1;
-    int cherrySpawnTime = time(NULL);//tempo in cui compare la ciliegia
+void spawnCherry(game *Game, int cherryActive, int cherrySpawnTime) {
+    cherryActive = 1;
+    cherrySpawnTime = time(NULL);//tempo in cui compare la ciliegia
     Game->Cherry.y = 17;
     Game->Cherry.x = 15;
 }

@@ -30,7 +30,7 @@ void ShowMaze(SDL_Renderer *renderer);
 void InitializeGame(game Game);
 void UpdateGame(game Game);
 void updateClydePosition(game *Game);
-void spawnCherry(game *Game);
+void spawnCherry(game *Game, int cherryActive, int cherrySpawnTime);
 
 
 #endif //POLIMIAER_GAME_H
