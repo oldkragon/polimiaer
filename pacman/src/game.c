@@ -32,14 +32,7 @@
     }
     return 0;
 }*/
-void updateInkyPosition(game *game);
-void updatePinkyPosition(game *game);
-void updateBlinkyPosition(game *game);
-void resetPacManPosition(game *Game);
-void resetPinkyPosition(game *Game);
-void resetInkyPosition(game *Game);
-void resetBlinkyPosition(game *Game);
-void resetClydePosition(game *Game);
+
 
 void InitializeGame(game Game){
     char InitialMaze[HEIGHT][WIDTH] = {{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
@@ -445,15 +438,15 @@ void UpdateGame(game Game){
         if (pacmanActive==1) {
             // Pacman mangia il fantasma
             Game.score += BONUS_POINTS;
-            resetClydePosition(&Game.Clyde);
+            resetClydePosition(&Game);
         } else {
             // Pacman perde una vita
             Game.lives--;
             if (Game.lives == 0) {
                 //endGame();
             } else {
-                resetPacManPosition(&Game.PacMan);
-                resetClydePosition(&Game.Clyde);
+                resetPacManPosition(&Game);
+                resetClydePosition(&Game);
             }
         }
     }
@@ -461,14 +454,14 @@ void UpdateGame(game Game){
     if (Game.PacMan.x == Game.Pinky.x && Game.PacMan.y == Game.Pinky.y){
         if (pacmanActive==1) {
             Game.score += BONUS_POINTS;
-            resetPinkyPosition(&Game.Pinky);
+            resetPinkyPosition(&Game);
         } else {
             Game.lives--;
             if (Game.lives == 0) {
                 //endGame();
             } else {
-                resetPacManPosition(&Game.PacMan);
-                resetPinkyPosition(&Game.Pinky);
+                resetPacManPosition(&Game);
+                resetPinkyPosition(&Game);
             }
         }
     }
@@ -476,14 +469,14 @@ void UpdateGame(game Game){
     if (Game.PacMan.x == Game.Inky.x && Game.PacMan.y == Game.Inky.y) {
         if (pacmanActive==1) {
             Game.score += BONUS_POINTS;
-            resetInkyPosition(&Game.Inky);
+            resetInkyPosition(&Game);
         } else {
             Game.lives--;
             if (Game.lives == 0) {
                 //endGame();
             } else {
-                resetPacManPosition(&Game.PacMan);
-                resetInkyPosition(&Game.Inky);
+                resetPacManPosition(&Game);
+                resetInkyPosition(&Game);
             }
         }
     }
@@ -491,14 +484,14 @@ void UpdateGame(game Game){
     if (Game.PacMan.x == Game.Blinky.x && Game.PacMan.y == Game.Blinky.y) {
         if (pacmanActive==1) {
             Game.score += BONUS_POINTS;
-            resetBlinkyPosition(&Game.Blinky);
+            resetBlinkyPosition(&Game);
         } else {
             Game.lives--;
             if (Game.lives == 0) {
                 //endGame();
             } else {
-                resetPacManPosition(&Game.PacMan);
-                resetBlinkyPosition(&Game.Blinky);
+                resetPacManPosition(&Game);
+                resetBlinkyPosition(&Game);
             }
         }
     }

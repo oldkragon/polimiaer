@@ -31,6 +31,14 @@ void InitializeGame(game Game);
 void UpdateGame(game Game);
 void updateClydePosition(game *Game);
 void spawnCherry(game *Game, int cherryActive, int cherrySpawnTime);
+void updateInkyPosition(game *game);
+void updatePinkyPosition(game *game);
+void updateBlinkyPosition(game *game);
+void resetPacManPosition(game *Game);
+void resetPinkyPosition(game *Game);
+void resetInkyPosition(game *Game);
+void resetBlinkyPosition(game *Game);
+void resetClydePosition(game *Game);
 
 
 #endif //POLIMIAER_GAME_H
