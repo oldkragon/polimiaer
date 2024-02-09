@@ -24,13 +24,15 @@ typedef struct{
     int score;
     int moveCounter;
     int countDots;
+    int cherryActive;
+    int cherrySpawnTime;
 }game;
 
 void ShowMaze(SDL_Renderer *renderer);
 void InitializeGame(game Game);
 void UpdateGame(game Game);
 void updateClydePosition(game *Game);
-void spawnCherry(game *Game, int cherryActive, int cherrySpawnTime);
+void spawnCherry(game *Game);
 void updateInkyPosition(game *game);
 void updatePinkyPosition(game *game);
 void updateBlinkyPosition(game *game);

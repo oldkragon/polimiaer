@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <SDL2/SDL.h>
 #include "game.h"
 
@@ -17,6 +16,8 @@ int SDL_main(int argc, char* argv[]) {
         SDL_Quit();
         return -1;
     }
+    game Game;
+    InitializeGame(Game);
     SDL_Event event;
 
     while (running) {
@@ -24,6 +25,7 @@ int SDL_main(int argc, char* argv[]) {
             if (event.type == SDL_QUIT) {
                 running = 0;
             }
+            UpdateGame(Game);
             ShowMaze(renderer);
         }
     }

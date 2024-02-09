@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <windows.h>
-#include <math.h>
 #include <time.h>
 #include <stdlib.h>
 #include "game.h"
@@ -102,12 +99,12 @@ void InitializeGame(game Game){
     Game.PacMan.y = 14;
 
     Game.moveCounter = 0;
+    Game.cherryActive = 0;
 }
 
 void UpdateGame(game Game){
     char input;
-    int cherryActive = 0;
-    int cherrySpawnTime;
+
 //aggiorna la posizione di pacman in base all'input
     switch (input){
         case 'w': {
@@ -134,30 +131,8 @@ void UpdateGame(game Game){
                 break;
             }
         }
-        case (GetAsyncKeyState(VK_UP)): {
-            if(Game.maze[Game.PacMan.y-1][Game.PacMan.x] != 'm') {
-                Game.PacMan.y--;
-                break;
-            }
-        }
-        case (GetAsyncKeyState(VK_DOWN)): {
-            if(Game.maze[Game.PacMan.y+1][Game.PacMan.x] != 'm') {
-                Game.PacMan.y++;
-                break;
-            }
-        }
-        case (GetAsyncKeyState(VK_LEFT)): {
-            if(Game.maze[Game.PacMan.y][Game.PacMan.x-1] != 'm') {
-                Game.PacMan.x--;
-                break;
-            }
-        }
-        case (GetAsyncKeyState(VK_RIGHT)): {
-            if(Game.maze[Game.PacMan.y][Game.PacMan.x+1] != 'm') {
-                Game.PacMan.x++;
-                break;
-            }
-        }
+        default:
+            break;
     }
 
     Game.moveCounter++;
@@ -227,22 +202,8 @@ void UpdateGame(game Game){
                 predictedPacManPos.x += 4;
                 break;
             }
-            case (GetAsyncKeyState(VK_UP)): {
-                predictedPacManPos.y -= 4;
+            default:
                 break;
-            }
-            case (GetAsyncKeyState(VK_DOWN)): {
-                predictedPacManPos.y += 4;
-                break;
-            }
-            case (GetAsyncKeyState(VK_LEFT)): {
-                predictedPacManPos.x -= 4;
-                break;
-            }
-            case (GetAsyncKeyState(VK_RIGHT)): {
-                predictedPacManPos.x += 4;
-                break;
-            }
         }
 
         if(predictedPacManPos.x > Game.Pinky.x && predictedPacManPos.y >= Game.Pinky.y){
@@ -401,20 +362,20 @@ void UpdateGame(game Game){
     }
     //ciliegia
     if(Game.score == 70 || Game.score == 170) {
-        spawnCherry(&Game, cherryActive, cherrySpawnTime);
+        spawnCherry(&Game);
     }
 
-    if(cherryActive == 1){
+    if(Game.cherryActive == 1){
         int currTime = time(NULL);
-        if(difftime(currTime, cherrySpawnTime)>=10){
-            cherryActive = 0;
+        if(difftime(currTime, Game.cherrySpawnTime)>=10){
+            Game.cherryActive = 0;
         }
     }
 
     int pacmanActive = 0;  //stato di Pac-Man (0 = normale, 1 = potenziato)
     time_t powerupStartTime;  //Pac-Man mangia una ciliegia
 
-    if(cherryActive == 1 && Game.maze[Game.PacMan.y][Game.PacMan.x] == CHERRY) {
+    if(Game.cherryActive == 1 && Game.maze[Game.PacMan.y][Game.PacMan.x] == CHERRY) {
         pacmanActive = 1;
         Game.score += CHERRY_POINTS;
         powerupStartTime = time(NULL);  //tempo corrente
@@ -670,9 +631,9 @@ void updateBlinkyPosition(game *game) {
     }
 }
 
-void spawnCherry(game *Game, int cherryActive, int cherrySpawnTime) {
-    cherryActive = 1;
-    cherrySpawnTime = time(NULL);//tempo in cui compare la ciliegia
+void spawnCherry(game *Game) {
+    Game->cherryActive = 1;
+    Game->cherrySpawnTime = time(NULL);//tempo in cui compare la ciliegia
     Game->Cherry.y = 17;
     Game->Cherry.x = 15;
 }
