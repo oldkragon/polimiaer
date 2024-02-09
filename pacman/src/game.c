@@ -658,3 +658,43 @@ void ShowMaze(SDL_Renderer *renderer) {
     }
     SDL_RenderPresent(renderer);
 }
+
+void ShowEntities(SDL_Renderer *renderer, game *Game) {
+    SDL_SetRenderDrawColor(renderer, 33, 33, 222, 255);
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            if(Game->maze[i][j] == 'm') {
+                SDL_Rect rect = {j* CELL_SIZE, i*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+                SDL_RenderFillRect(renderer, &rect);
+            }
+        }
+    }
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_Rect PacMan = {Game->PacMan.x*CELL_SIZE, Game->PacMan.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+    SDL_RenderFillRect(renderer, &PacMan);
+
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_Rect Blinky = {Game->Blinky.x*CELL_SIZE, Game->Blinky.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+    SDL_RenderFillRect(renderer, &Blinky);
+
+    SDL_SetRenderDrawColor(renderer, 255, 184, 255, 255);
+    SDL_Rect Pinky = {Game->Pinky.x*CELL_SIZE, Game->Pinky.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+    SDL_RenderFillRect(renderer, &Pinky);
+
+    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+    SDL_Rect Inky = {Game->Inky.x*CELL_SIZE, Game->Inky.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+    SDL_RenderFillRect(renderer, &Inky);
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_Rect Clyde = {Game->Clyde.x*CELL_SIZE, Game->Clyde.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+    SDL_RenderFillRect(renderer, &Clyde);
+
+    if(Game->cherryActive) {
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+        SDL_Rect Cherry = {Game->Cherry.x*CELL_SIZE, Game->Cherry.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+        SDL_RenderFillRect(renderer, &Cherry);
+    }
+
+    SDL_RenderPresent(renderer);
+}
