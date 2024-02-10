@@ -1,21 +1,22 @@
+#include "game.h"
 #include <SDL2/SDL.h>
 #include <stdbool.h>
-#include "game.h"
 
 int SDL_main() {
     int running = 1;
     char key;
     bool keys[SDL_NUM_SCANCODES] = {false};
-    if(SDL_Init(SDL_INIT_VIDEO)!=0) {
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         return -1;
     }
-    SDL_Window *window = SDL_CreateWindow("SDL2 Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
-    if(window==NULL) {
+    SDL_Window *window = SDL_CreateWindow("SDL2 Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720,
+                                          SDL_WINDOW_RESIZABLE);
+    if (window == NULL) {
         SDL_Quit();
         return -1;
     }
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if(renderer==NULL) {
+    if (renderer == NULL) {
         SDL_Quit();
         return -1;
     }
@@ -40,8 +41,7 @@ int SDL_main() {
                     break;
             }
         }
-        key = GetPressedKeys(keys);
-        UpdateGame(&Game, key);
+        UpdateGame(&Game, keys);
         ShowMaze(renderer);
         ShowEntities(renderer, &Game);
     }

@@ -31,38 +31,38 @@
 }*/
 
 
-void InitializeGame(game *Game){
+void InitializeGame(game *Game) {
     char InitialMaze[HEIGHT][WIDTH] = {{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.' ,'.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
-                        {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
-                        {'m', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', 'm'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', '.', '.', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', '.', '.', '.', '.', '.', '.', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', '.', '.', '.', '.', '.', '.', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', '.', '.', '.', '.', '.', '.', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
-                        {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
-                        {'m', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', 'm'},
-                        {'m', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm'},
-                        {'m', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
-                        {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
-                        {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
-                        {'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'}
+                                       {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
+                                       {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                                       {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                                       {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                                       {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
+                                       {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                                       {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                                       {'m', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', 'm'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', '.', '.', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', '.', '.', '.', '.', '.', '.', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                                       {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', '.', '.', '.', '.', '.', '.', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', '.', '.', '.', '.', '.', '.', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm'},
+                                       {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
+                                       {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                                       {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                                       {'m', '.', '.', '.', 'm', 'm', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm', 'm', '.', '.', '.', 'm'},
+                                       {'m', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm'},
+                                       {'m', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm'},
+                                       {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                                       {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                                       {'m', '.', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', '.', 'm', 'm', 'm', 'm', 'm', '.', 'm', 'm', 'm', 'm', '.', 'm'},
+                                       {'m', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'm'},
+                                       {'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'}
 
     };
     Game->lives = 3;
@@ -78,8 +78,8 @@ void InitializeGame(game *Game){
 
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            if(InitialMaze[i][j] == '.')
-            Game->countDots++;
+            if (InitialMaze[i][j] == '.')
+                Game->countDots++;
         }
     }
 
@@ -102,151 +102,137 @@ void InitializeGame(game *Game){
     Game->cherryActive = 0;
 }
 
-void UpdateGame(game *Game, char input){
+void UpdateGame(game *Game, const bool keys[SDL_NUM_SCANCODES]) {
 
 //aggiorna la posizione di pacman in base all'input
-    switch (input){
-        case 'w': {
-            if(Game->maze[Game->PacMan.y-1][Game->PacMan.x] != 'm') {
-                Game->PacMan.y--;
-                break;
-            }
+    if (keys[SDL_SCANCODE_W]) {
+        if (Game->maze[Game->PacMan.y - 1][Game->PacMan.x] != 'm') {
+            Game->PacMan.y--;
         }
-        case 's': {
-            if(Game->maze[Game->PacMan.y+1][Game->PacMan.x] != 'm') {
-                Game->PacMan.y++;
-                break;
-            }
+    }
+    if (keys[SDL_SCANCODE_S]) {
+        if (Game->maze[Game->PacMan.y + 1][Game->PacMan.x] != 'm') {
+            Game->PacMan.y++;
         }
-        case 'a': {
-            if(Game->maze[Game->PacMan.y][Game->PacMan.x-1] != 'm') {
-                Game->PacMan.x--;
-                break;
-            }
+    }
+    if (keys[SDL_SCANCODE_A]) {
+        if (Game->maze[Game->PacMan.y][Game->PacMan.x - 1] != 'm') {
+            Game->PacMan.x--;
         }
-        case 'd': {
-            if(Game->maze[Game->PacMan.y][Game->PacMan.x+1] != 'm') {
-                Game->PacMan.x++;
-                break;
-            }
+    }
+    if (keys[SDL_SCANCODE_D]) {
+        if (Game->maze[Game->PacMan.y][Game->PacMan.x + 1] != 'm') {
+            Game->PacMan.x++;
         }
-        default:
-            break;
     }
 
     Game->moveCounter++;
 
-    while (Game->moveCounter > 7){
+    while (Game->moveCounter > 7) {
         //Blinky lo segue diretto - parte 7 mosse dopo
-        if(Game->PacMan.x > Game->Blinky.x && Game->PacMan.y >= Game->Blinky.y){
-            if(Game->maze[Game->Blinky.y-1][Game->Blinky.x] != 'm')
+        if (Game->PacMan.x > Game->Blinky.x && Game->PacMan.y >= Game->Blinky.y) {
+            if (Game->maze[Game->Blinky.y - 1][Game->Blinky.x] != 'm')
                 Game->Blinky.y--;
-            else if(Game->maze[Game->Blinky.y][Game->Blinky.x+1] != 'm')
+            else if (Game->maze[Game->Blinky.y][Game->Blinky.x + 1] != 'm')
                 Game->Blinky.x++;
-            else if(Game->maze[Game->Blinky.y+1][Game->Blinky.x] != 'm')
+            else if (Game->maze[Game->Blinky.y + 1][Game->Blinky.x] != 'm')
                 Game->Blinky.y++;
-            else if(Game->maze[Game->Blinky.y][Game->Blinky.x-1] != 'm')
+            else if (Game->maze[Game->Blinky.y][Game->Blinky.x - 1] != 'm')
                 Game->Blinky.x--;
         }
 
-        if(Game->PacMan.x >= Game->Blinky.x && Game->PacMan.y < Game->Blinky.y){
-            if(Game->maze[Game->Blinky.y][Game->Blinky.x+1] != 'm')
+        if (Game->PacMan.x >= Game->Blinky.x && Game->PacMan.y < Game->Blinky.y) {
+            if (Game->maze[Game->Blinky.y][Game->Blinky.x + 1] != 'm')
                 Game->Blinky.x++;
-            else if(Game->maze[Game->Blinky.y+1][Game->Blinky.x] != 'm')
+            else if (Game->maze[Game->Blinky.y + 1][Game->Blinky.x] != 'm')
                 Game->Blinky.y++;
-            else if(Game->maze[Game->Blinky.y][Game->Blinky.x-1] != 'm')
+            else if (Game->maze[Game->Blinky.y][Game->Blinky.x - 1] != 'm')
                 Game->Blinky.x--;
-            else if(Game->maze[Game->Blinky.y-1][Game->Blinky.x] != 'm')
+            else if (Game->maze[Game->Blinky.y - 1][Game->Blinky.x] != 'm')
                 Game->Blinky.y--;
         }
 
-        if(Game->PacMan.x < Game->Blinky.x && Game->PacMan.y <= Game->Blinky.y){
-            if(Game->maze[Game->Blinky.y+1][Game->Blinky.x] != 'm')
+        if (Game->PacMan.x < Game->Blinky.x && Game->PacMan.y <= Game->Blinky.y) {
+            if (Game->maze[Game->Blinky.y + 1][Game->Blinky.x] != 'm')
                 Game->Blinky.y++;
-            else if(Game->maze[Game->Blinky.y][Game->Blinky.x-1] != 'm')
+            else if (Game->maze[Game->Blinky.y][Game->Blinky.x - 1] != 'm')
                 Game->Blinky.x--;
-            else if(Game->maze[Game->Blinky.y-1][Game->Blinky.x] != 'm')
+            else if (Game->maze[Game->Blinky.y - 1][Game->Blinky.x] != 'm')
                 Game->Blinky.y--;
-            else if(Game->maze[Game->Blinky.y][Game->Blinky.x+1] != 'm')
+            else if (Game->maze[Game->Blinky.y][Game->Blinky.x + 1] != 'm')
                 Game->Blinky.x++;
         }
 
-        if(Game->PacMan.x <= Game->Blinky.x && Game->PacMan.y > Game->Blinky.y){
-            if(Game->maze[Game->Blinky.y][Game->Blinky.x-1] != 'm')
+        if (Game->PacMan.x <= Game->Blinky.x && Game->PacMan.y > Game->Blinky.y) {
+            if (Game->maze[Game->Blinky.y][Game->Blinky.x - 1] != 'm')
                 Game->Blinky.x--;
-            else if(Game->maze[Game->Blinky.y-1][Game->Blinky.x] != 'm')
+            else if (Game->maze[Game->Blinky.y - 1][Game->Blinky.x] != 'm')
                 Game->Blinky.y--;
-            else if(Game->maze[Game->Blinky.y][Game->Blinky.x+1] != 'm')
+            else if (Game->maze[Game->Blinky.y][Game->Blinky.x + 1] != 'm')
                 Game->Blinky.x++;
-            else if(Game->maze[Game->Blinky.y+1][Game->Blinky.x] != 'm')
+            else if (Game->maze[Game->Blinky.y + 1][Game->Blinky.x] != 'm')
                 Game->Blinky.y++;
         }
         //Pinky tenta di capire dove sarà tra 4 mosse
         position predictedPacManPos = Game->PacMan;
 
-        switch (input) {
-            case 'w': {
-                predictedPacManPos.y -= 4;
-                break;
-            }
-            case 's': {
-                predictedPacManPos.y += 4;
-                break;
-            }
-            case 'a': {
-                predictedPacManPos.x -= 4;
-                break;
-            }
-            case 'd': {
-                predictedPacManPos.x += 4;
-                break;
-            }
-            default:
-                break;
+        if (keys[SDL_SCANCODE_W]) {
+            predictedPacManPos.y -= 4;
+        }
+        if (keys[SDL_SCANCODE_S]) {
+            predictedPacManPos.y += 4;
+        }
+        if (keys[SDL_SCANCODE_A]) {
+            predictedPacManPos.x -= 4;
+            break;
+        }
+        if (keys[SDL_SCANCODE_D]) {
+            predictedPacManPos.x += 4;
+            break;
         }
 
-        if(predictedPacManPos.x > Game->Pinky.x && predictedPacManPos.y >= Game->Pinky.y){
-            if(Game->maze[Game->Pinky.y-1][Game->Pinky.x] != 'm')
+        if (predictedPacManPos.x > Game->Pinky.x && predictedPacManPos.y >= Game->Pinky.y) {
+            if (Game->maze[Game->Pinky.y - 1][Game->Pinky.x] != 'm')
                 Game->Pinky.y--;
-            else if(Game->maze[Game->Pinky.y][Game->Pinky.x+1] != 'm')
+            else if (Game->maze[Game->Pinky.y][Game->Pinky.x + 1] != 'm')
                 Game->Pinky.x++;
-            else if(Game->maze[Game->Pinky.y+1][Game->Pinky.x] != 'm')
+            else if (Game->maze[Game->Pinky.y + 1][Game->Pinky.x] != 'm')
                 Game->Pinky.y++;
-            else if(Game->maze[Game->Pinky.y][Game->Pinky.x-1] != 'm')
+            else if (Game->maze[Game->Pinky.y][Game->Pinky.x - 1] != 'm')
                 Game->Pinky.x--;
         }
 
-        if(predictedPacManPos.x >= Game->Pinky.x && predictedPacManPos.y < Game->Pinky.y){
-            if(Game->maze[Game->Pinky.y][Game->Pinky.x+1] != 'm')
+        if (predictedPacManPos.x >= Game->Pinky.x && predictedPacManPos.y < Game->Pinky.y) {
+            if (Game->maze[Game->Pinky.y][Game->Pinky.x + 1] != 'm')
                 Game->Pinky.x++;
-            else if(Game->maze[Game->Pinky.y+1][Game->Pinky.x] != 'm')
+            else if (Game->maze[Game->Pinky.y + 1][Game->Pinky.x] != 'm')
                 Game->Pinky.y++;
-            else if(Game->maze[Game->Pinky.y][Game->Pinky.x-1] != 'm')
+            else if (Game->maze[Game->Pinky.y][Game->Pinky.x - 1] != 'm')
                 Game->Pinky.x--;
             else if (Game->maze[Game->Pinky.y - 1][Game->Pinky.x] != 'm') {
                 Game->Pinky.y--;
             }
         }
 
-        if(predictedPacManPos.x < Game->Pinky.x && predictedPacManPos.y <= Game->Pinky.y){
-            if(Game->maze[Game->Pinky.y+1][Game->Pinky.x] != 'm')
+        if (predictedPacManPos.x < Game->Pinky.x && predictedPacManPos.y <= Game->Pinky.y) {
+            if (Game->maze[Game->Pinky.y + 1][Game->Pinky.x] != 'm')
                 Game->Pinky.y++;
-            else if(Game->maze[Game->Pinky.y][Game->Pinky.x-1] != 'm')
+            else if (Game->maze[Game->Pinky.y][Game->Pinky.x - 1] != 'm')
                 Game->Pinky.x--;
-            else if(Game->maze[Game->Pinky.y-1][Game->Pinky.x] != 'm')
+            else if (Game->maze[Game->Pinky.y - 1][Game->Pinky.x] != 'm')
                 Game->Pinky.y--;
-            else if(Game->maze[Game->Pinky.y][Game->Pinky.x+1] != 'm')
+            else if (Game->maze[Game->Pinky.y][Game->Pinky.x + 1] != 'm')
                 Game->Pinky.x++;
         }
 
-        if(predictedPacManPos.x <= Game->Pinky.x && predictedPacManPos.y > Game->Pinky.y){
-            if(Game->maze[Game->Pinky.y][Game->Pinky.x-1] != 'm')
+        if (predictedPacManPos.x <= Game->Pinky.x && predictedPacManPos.y > Game->Pinky.y) {
+            if (Game->maze[Game->Pinky.y][Game->Pinky.x - 1] != 'm')
                 Game->Pinky.x--;
-            else if(Game->maze[Game->Pinky.y-1][Game->Pinky.x] != 'm')
+            else if (Game->maze[Game->Pinky.y - 1][Game->Pinky.x] != 'm')
                 Game->Pinky.y--;
-            else if(Game->maze[Game->Pinky.y][Game->Pinky.x+1] != 'm')
+            else if (Game->maze[Game->Pinky.y][Game->Pinky.x + 1] != 'm')
                 Game->Pinky.x++;
-            else if(Game->maze[Game->Pinky.y+1][Game->Pinky.x] != 'm')
+            else if (Game->maze[Game->Pinky.y + 1][Game->Pinky.x] != 'm')
                 Game->Pinky.y++;
         }
         //Inky mira a una posizione che è due volte la distanza da Blinky alla posizione che sarebbe quattro passi avanti a Pac-Man nella direzione in cui Pac-Man sta attualmente andando
@@ -254,10 +240,10 @@ void UpdateGame(game *Game, char input){
         targetPosition.x = 2 * predictedPacManPos.x - Game->Blinky.x;
         targetPosition.y = 2 * predictedPacManPos.y - Game->Blinky.y;
 
-        if(targetPosition.x > Game->Inky.x && targetPosition.y >= Game->Inky.y){
-            if(Game->maze[Game->Inky.y-1][Game->Inky.x] != 'm')
+        if (targetPosition.x > Game->Inky.x && targetPosition.y >= Game->Inky.y) {
+            if (Game->maze[Game->Inky.y - 1][Game->Inky.x] != 'm')
                 Game->Inky.y--;
-            else if(Game->maze[Game->Inky.y][Game->Inky.x+1] != 'm')
+            else if (Game->maze[Game->Inky.y][Game->Inky.x + 1] != 'm')
                 Game->Inky.x++;
             else if (Game->maze[Game->Inky.y + 1][Game->Inky.x] != 'm') {
                 Game->Inky.y++;
@@ -265,10 +251,10 @@ void UpdateGame(game *Game, char input){
                 Game->Inky.x--;
         }
 
-        if(targetPosition.x >= Game->Inky.x && targetPosition.y < Game->Inky.y){
-            if(Game->maze[Game->Inky.y][Game->Inky.x+1] != 'm')
+        if (targetPosition.x >= Game->Inky.x && targetPosition.y < Game->Inky.y) {
+            if (Game->maze[Game->Inky.y][Game->Inky.x + 1] != 'm')
                 Game->Inky.x++;
-            else if(Game->maze[Game->Inky.y+1][Game->Inky.x] != 'm')
+            else if (Game->maze[Game->Inky.y + 1][Game->Inky.x] != 'm')
                 Game->Inky.y++;
             else if (Game->maze[Game->Inky.y][Game->Inky.x - 1] != 'm') {
                 Game->Inky.x--;
@@ -276,43 +262,43 @@ void UpdateGame(game *Game, char input){
                 Game->Inky.y--;
         }
 
-        if(targetPosition.x < Game->Inky.x && targetPosition.y <= Game->Inky.y){
-            if(Game->maze[Game->Inky.y+1][Game->Inky.x] != 'm')
+        if (targetPosition.x < Game->Inky.x && targetPosition.y <= Game->Inky.y) {
+            if (Game->maze[Game->Inky.y + 1][Game->Inky.x] != 'm')
                 Game->Inky.y++;
-            else if(Game->maze[Game->Inky.y][Game->Inky.x-1] != 'm')
+            else if (Game->maze[Game->Inky.y][Game->Inky.x - 1] != 'm')
                 Game->Inky.x--;
-            else if(Game->maze[Game->Inky.y-1][Game->Inky.x] != 'm')
+            else if (Game->maze[Game->Inky.y - 1][Game->Inky.x] != 'm')
                 Game->Inky.y--;
-            else if(Game->maze[Game->Inky.y][Game->Inky.x+1] != 'm')
+            else if (Game->maze[Game->Inky.y][Game->Inky.x + 1] != 'm')
                 Game->Inky.x++;
         }
 
-        if(targetPosition.x <= Game->Inky.x && targetPosition.y > Game->Inky.y){
-            if(Game->maze[Game->Inky.y][Game->Inky.x-1] != 'm')
+        if (targetPosition.x <= Game->Inky.x && targetPosition.y > Game->Inky.y) {
+            if (Game->maze[Game->Inky.y][Game->Inky.x - 1] != 'm')
                 Game->Inky.x--;
-            else if(Game->maze[Game->Inky.y-1][Game->Inky.x] != 'm')
+            else if (Game->maze[Game->Inky.y - 1][Game->Inky.x] != 'm')
                 Game->Inky.y--;
-            else if(Game->maze[Game->Inky.y][Game->Inky.x+1] != 'm')
+            else if (Game->maze[Game->Inky.y][Game->Inky.x + 1] != 'm')
                 Game->Inky.x++;
-            else if(Game->maze[Game->Inky.y+1][Game->Inky.x] != 'm')
+            else if (Game->maze[Game->Inky.y + 1][Game->Inky.x] != 'm')
                 Game->Inky.y++;
 
         }
         //Clyde si muove a caso se si trova a una distanza <= di 8 celle da Pacman, altrimenti fa come Blinky
-        if(abs(Game->PacMan.x - Game->Clyde.x)>8 && abs(Game->PacMan.y - Game->Clyde.y)>8) {
-            if(Game->PacMan.x > Game->Clyde.x && Game->PacMan.y >= Game->Clyde.y){
-                if(Game->maze[Game->Clyde.y-1][Game->Clyde.x] != 'm')
+        if (abs(Game->PacMan.x - Game->Clyde.x) > 8 && abs(Game->PacMan.y - Game->Clyde.y) > 8) {
+            if (Game->PacMan.x > Game->Clyde.x && Game->PacMan.y >= Game->Clyde.y) {
+                if (Game->maze[Game->Clyde.y - 1][Game->Clyde.x] != 'm')
                     Game->Clyde.y--;
-                else if(Game->maze[Game->Clyde.y][Game->Clyde.x+1] != 'm')
+                else if (Game->maze[Game->Clyde.y][Game->Clyde.x + 1] != 'm')
                     Game->Clyde.x++;
-                else if(Game->maze[Game->Clyde.y+1][Game->Clyde.x] != 'm')
+                else if (Game->maze[Game->Clyde.y + 1][Game->Clyde.x] != 'm')
                     Game->Clyde.y++;
-                else if(Game->maze[Game->Clyde.y][Game->Clyde.x-1] != 'm')
+                else if (Game->maze[Game->Clyde.y][Game->Clyde.x - 1] != 'm')
                     Game->Clyde.x--;
             }
 
-            if(Game->PacMan.x >= Game->Clyde.x && Game->PacMan.y < Game->Clyde.y){
-                if(Game->maze[Game->Clyde.y][Game->Clyde.x+1] != 'm')
+            if (Game->PacMan.x >= Game->Clyde.x && Game->PacMan.y < Game->Clyde.y) {
+                if (Game->maze[Game->Clyde.y][Game->Clyde.x + 1] != 'm')
                     Game->Clyde.x++;
                 else if (Game->maze[Game->Clyde.y + 1][Game->Clyde.x] != 'm') {
                     Game->Clyde.y++;
@@ -322,52 +308,51 @@ void UpdateGame(game *Game, char input){
                     Game->Clyde.y--;
             }
 
-            if(Game->PacMan.x < Game->Clyde.x && Game->PacMan.y <= Game->Clyde.y){
-                if(Game->maze[Game->Clyde.y+1][Game->Clyde.x] != 'm')
+            if (Game->PacMan.x < Game->Clyde.x && Game->PacMan.y <= Game->Clyde.y) {
+                if (Game->maze[Game->Clyde.y + 1][Game->Clyde.x] != 'm')
                     Game->Clyde.y++;
-                else if(Game->maze[Game->Clyde.y][Game->Clyde.x-1] != 'm')
+                else if (Game->maze[Game->Clyde.y][Game->Clyde.x - 1] != 'm')
                     Game->Clyde.x--;
-                else if(Game->maze[Game->Clyde.y-1][Game->Clyde.x] != 'm')
+                else if (Game->maze[Game->Clyde.y - 1][Game->Clyde.x] != 'm')
                     Game->Clyde.y--;
-                else if(Game->maze[Game->Clyde.y][Game->Clyde.x+1] != 'm')
+                else if (Game->maze[Game->Clyde.y][Game->Clyde.x + 1] != 'm')
                     Game->Clyde.x++;
             }
 
-            if(Game->PacMan.x <= Game->Clyde.x && Game->PacMan.y > Game->Clyde.y){
-                if(Game->maze[Game->Clyde.y][Game->Clyde.x-1] != 'm')
+            if (Game->PacMan.x <= Game->Clyde.x && Game->PacMan.y > Game->Clyde.y) {
+                if (Game->maze[Game->Clyde.y][Game->Clyde.x - 1] != 'm')
                     Game->Clyde.x--;
-                else if(Game->maze[Game->Clyde.y-1][Game->Clyde.x] != 'm')
+                else if (Game->maze[Game->Clyde.y - 1][Game->Clyde.x] != 'm')
                     Game->Clyde.y--;
-                else if(Game->maze[Game->Clyde.y][Game->Clyde.x+1] != 'm')
+                else if (Game->maze[Game->Clyde.y][Game->Clyde.x + 1] != 'm')
                     Game->Clyde.x++;
-                else if(Game->maze[Game->Clyde.y+1][Game->Clyde.x] != 'm')
+                else if (Game->maze[Game->Clyde.y + 1][Game->Clyde.x] != 'm')
                     Game->Clyde.y++;
             }
-        }
-        else updateClydePosition(Game);
+        } else updateClydePosition(Game);
     }//fine while
     // Verifica se Pac-Man ha raccolto un punto e aggiorna il punteggio + se tutti i puntini sono spariti rimettere i puntini
-    if(Game->maze[Game->PacMan.y][Game->PacMan.x] == DOT){
+    if (Game->maze[Game->PacMan.y][Game->PacMan.x] == DOT) {
         Game->score++;
         Game->maze[Game->PacMan.y][Game->PacMan.x] = ' ';
         Game->countDots--;
-        if(Game->countDots == 0){
+        if (Game->countDots == 0) {
             for (int i = 0; i < HEIGHT; i++) {
                 for (int j = 0; j < WIDTH; j++) {
-                    if(Game->maze[i][j] == ' ')
+                    if (Game->maze[i][j] == ' ')
                         Game->maze[i][j] = '.';
                 }
             }
         }
     }
     //ciliegia
-    if(Game->score == 70 || Game->score == 170) {
+    if (Game->score == 70 || Game->score == 170) {
         spawnCherry(Game);
     }
 
-    if(Game->cherryActive == 1){
+    if (Game->cherryActive == 1) {
         int currTime = time(NULL);
-        if(difftime(currTime, Game->cherrySpawnTime)>=10){
+        if (difftime(currTime, Game->cherrySpawnTime) >= 10) {
             Game->cherryActive = 0;
         }
     }
@@ -375,7 +360,7 @@ void UpdateGame(game *Game, char input){
     int pacmanActive = 0;  //stato di Pac-Man (0 = normale, 1 = potenziato)
     time_t powerupStartTime;  //Pac-Man mangia una ciliegia
 
-    if(Game->cherryActive == 1 && Game->maze[Game->PacMan.y][Game->PacMan.x] == CHERRY) {
+    if (Game->cherryActive == 1 && Game->maze[Game->PacMan.y][Game->PacMan.x] == CHERRY) {
         pacmanActive = 1;
         Game->score += CHERRY_POINTS;
         powerupStartTime = time(NULL);  //tempo corrente
@@ -388,7 +373,7 @@ void UpdateGame(game *Game, char input){
         }
     }
 
-    while (pacmanActive == 1){
+    while (pacmanActive == 1) {
         updateClydePosition(Game);
         updateInkyPosition(Game);
         updateBlinkyPosition(Game);
@@ -396,7 +381,7 @@ void UpdateGame(game *Game, char input){
     }
     // Verifica se Pac-Man è stato catturato da un fantasma
     if (Game->PacMan.x == Game->Clyde.x && Game->PacMan.y == Game->Clyde.y) {
-        if (pacmanActive==1) {
+        if (pacmanActive == 1) {
             // Pacman mangia il fantasma
             Game->score += BONUS_POINTS;
             resetClydePosition(Game);
@@ -412,8 +397,8 @@ void UpdateGame(game *Game, char input){
         }
     }
 
-    if (Game->PacMan.x == Game->Pinky.x && Game->PacMan.y == Game->Pinky.y){
-        if (pacmanActive==1) {
+    if (Game->PacMan.x == Game->Pinky.x && Game->PacMan.y == Game->Pinky.y) {
+        if (pacmanActive == 1) {
             Game->score += BONUS_POINTS;
             resetPinkyPosition(Game);
         } else {
@@ -428,7 +413,7 @@ void UpdateGame(game *Game, char input){
     }
 
     if (Game->PacMan.x == Game->Inky.x && Game->PacMan.y == Game->Inky.y) {
-        if (pacmanActive==1) {
+        if (pacmanActive == 1) {
             Game->score += BONUS_POINTS;
             resetInkyPosition(Game);
         } else {
@@ -443,7 +428,7 @@ void UpdateGame(game *Game, char input){
     }
 
     if (Game->PacMan.x == Game->Blinky.x && Game->PacMan.y == Game->Blinky.y) {
-        if (pacmanActive==1) {
+        if (pacmanActive == 1) {
             Game->score += BONUS_POINTS;
             resetBlinkyPosition(Game);
         } else {
@@ -460,25 +445,29 @@ void UpdateGame(game *Game, char input){
 }
 
 
-void resetPacManPosition(game *Game){
+void resetPacManPosition(game *Game) {
     Game->PacMan.x = 13;
     Game->PacMan.y = 13;
 }
-void resetPinkyPosition(game *Game){
+
+void resetPinkyPosition(game *Game) {
     Game->Pinky.x = 12;
     Game->Pinky.y = 14;
 
 }
-void resetInkyPosition(game *Game){
+
+void resetInkyPosition(game *Game) {
     Game->Inky.x = 13;
     Game->Inky.y = 14;
 
 }
-void resetBlinkyPosition(game *Game){
+
+void resetBlinkyPosition(game *Game) {
     Game->Blinky.x = 14;
     Game->Blinky.y = 14;
 }
-void resetClydePosition(game *Game){
+
+void resetClydePosition(game *Game) {
     Game->Clyde.x = 15;
     Game->Clyde.y = 14;
 }
@@ -639,7 +628,6 @@ void spawnCherry(game *Game) {
 }
 
 
-
 extern char maze[HEIGHT][WIDTH];
 
 void ShowMaze(SDL_Renderer *renderer) {
@@ -649,8 +637,8 @@ void ShowMaze(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, 33, 33, 222, 255);
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            if(maze[i][j] == 'm') {
-                SDL_Rect rect = {j* CELL_SIZE, i*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+            if (maze[i][j] == 'm') {
+                SDL_Rect rect = {j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE};
                 SDL_RenderFillRect(renderer, &rect);
             }
         }
@@ -662,57 +650,38 @@ void ShowEntities(SDL_Renderer *renderer, game *Game) {
     SDL_SetRenderDrawColor(renderer, 255, 240, 240, 255);
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            if(Game->maze[i][j] == '.') {
-                SDL_Rect rect = {j* CELL_SIZE, i*CELL_SIZE, 5, 5};
+            if (Game->maze[i][j] == '.') {
+                SDL_Rect rect = {j * CELL_SIZE, i * CELL_SIZE, 5, 5};
                 SDL_RenderFillRect(renderer, &rect);
             }
         }
     }
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-    SDL_Rect PacMan = {Game->PacMan.x*CELL_SIZE, Game->PacMan.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+    SDL_Rect PacMan = {Game->PacMan.x * CELL_SIZE, Game->PacMan.y * CELL_SIZE, CELL_SIZE, CELL_SIZE};
     SDL_RenderFillRect(renderer, &PacMan);
 
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_Rect Blinky = {Game->Blinky.x*CELL_SIZE, Game->Blinky.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+    SDL_Rect Blinky = {Game->Blinky.x * CELL_SIZE, Game->Blinky.y * CELL_SIZE, CELL_SIZE, CELL_SIZE};
     SDL_RenderFillRect(renderer, &Blinky);
 
     SDL_SetRenderDrawColor(renderer, 255, 184, 255, 255);
-    SDL_Rect Pinky = {Game->Pinky.x*CELL_SIZE, Game->Pinky.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+    SDL_Rect Pinky = {Game->Pinky.x * CELL_SIZE, Game->Pinky.y * CELL_SIZE, CELL_SIZE, CELL_SIZE};
     SDL_RenderFillRect(renderer, &Pinky);
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-    SDL_Rect Inky = {Game->Inky.x*CELL_SIZE, Game->Inky.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+    SDL_Rect Inky = {Game->Inky.x * CELL_SIZE, Game->Inky.y * CELL_SIZE, CELL_SIZE, CELL_SIZE};
     SDL_RenderFillRect(renderer, &Inky);
 
     SDL_SetRenderDrawColor(renderer, 255, 184, 82, 255);
-    SDL_Rect Clyde = {Game->Clyde.x*CELL_SIZE, Game->Clyde.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+    SDL_Rect Clyde = {Game->Clyde.x * CELL_SIZE, Game->Clyde.y * CELL_SIZE, CELL_SIZE, CELL_SIZE};
     SDL_RenderFillRect(renderer, &Clyde);
 
-    if(Game->cherryActive) {
+    if (Game->cherryActive) {
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_Rect Cherry = {Game->Cherry.x*CELL_SIZE, Game->Cherry.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+        SDL_Rect Cherry = {Game->Cherry.x * CELL_SIZE, Game->Cherry.y * CELL_SIZE, CELL_SIZE, CELL_SIZE};
         SDL_RenderFillRect(renderer, &Cherry);
     }
 
     SDL_RenderPresent(renderer);
-}
-
-char GetPressedKeys(const bool keys[SDL_NUM_SCANCODES]){
-    for (int i = 0; i < SDL_NUM_SCANCODES; i++) {
-        if(keys[i]) {
-            switch (i) {
-                case SDL_SCANCODE_A:
-                    return 'a';
-                case SDL_SCANCODE_W:
-                    return 'w';
-                case SDL_SCANCODE_S:
-                    return 's';
-                case SDL_SCANCODE_D:
-                    return 'd';
-                default:
-                    return '\0';
-            }
-        }
-    }
 }

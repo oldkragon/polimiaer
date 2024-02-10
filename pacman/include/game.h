@@ -32,7 +32,7 @@ typedef struct{
 void ShowMaze(SDL_Renderer *renderer);
 void ShowEntities(SDL_Renderer *renderer, game *Game);
 void InitializeGame(game *Game);
-void UpdateGame(game *Game, char input);
+void UpdateGame(game *Game, const bool keys[SDL_NUM_SCANCODES]);
 void updateClydePosition(game *Game);
 void spawnCherry(game *Game);
 void updateInkyPosition(game *game);
@@ -43,7 +43,6 @@ void resetPinkyPosition(game *Game);
 void resetInkyPosition(game *Game);
 void resetBlinkyPosition(game *Game);
 void resetClydePosition(game *Game);
-char GetPressedKeys(const bool keys[SDL_NUM_SCANCODES]);
 #endif //POLIMIAER_GAME_H
 
 
