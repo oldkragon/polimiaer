@@ -698,33 +698,21 @@ void ShowEntities(SDL_Renderer *renderer, game *Game) {
     SDL_RenderPresent(renderer);
 }
 
-int HandleEvent(SDL_Event event, int state, char key){
-    while (SDL_PollEvent(&event)) {
-        switch (event.type) {
-            case SDL_KEYDOWN:
-                switch (event.key.keysym.sym) {
-                    case SDLK_w:
-                        key = 'w';
-                        break;
-                    case SDLK_a:
-                        key = 'a';
-                        break;
-                    case SDLK_s:
-                        key = 's';
-                        break;
-                    case SDLK_d:
-                        key = 'd';
-                        break;
-                }
-
-                break;
-            case SDL_QUIT:
-                state = 0;
-                break;
-            default:
-                break;
+char GetPressedKeys(const bool keys[SDL_NUM_SCANCODES]){
+    for (int i = 0; i < SDL_NUM_SCANCODES; i++) {
+        if(keys[i]) {
+            switch (i) {
+                case SDL_SCANCODE_A:
+                    return 'a';
+                case SDL_SCANCODE_W:
+                    return 'w';
+                case SDL_SCANCODE_S:
+                    return 's';
+                case SDL_SCANCODE_D:
+                    return 'd';
+                default:
+                    return '\0';
+            }
         }
-        
     }
-    return state;
 }

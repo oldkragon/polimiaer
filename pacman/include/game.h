@@ -6,6 +6,7 @@
 #define HEIGHT 31
 
 #include <SDL.h>
+#include <stdbool.h>
 
 typedef struct {
     int x;
@@ -42,8 +43,7 @@ void resetPinkyPosition(game *Game);
 void resetInkyPosition(game *Game);
 void resetBlinkyPosition(game *Game);
 void resetClydePosition(game *Game);
-int HandleEvent(SDL_Event event, int state, char key);
-
+char GetPressedKeys(const bool keys[SDL_NUM_SCANCODES]);
 #endif //POLIMIAER_GAME_H
 
 
