@@ -3,6 +3,7 @@
 
 int SDL_main() {
     int running = 1;
+    char key = '\0';
     if(SDL_Init(SDL_INIT_VIDEO)!=0) {
         return -1;
     }
@@ -21,14 +22,10 @@ int SDL_main() {
     SDL_Event event;
 
     while (running) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                running = 0;
-            }
-            UpdateGame(&Game);
-            ShowMaze(renderer);
-            ShowEntities(renderer, &Game);
-        }
+        running= HandleEvent(event, running, key);
+        UpdateGame(&Game, key);
+        ShowMaze(renderer);
+        ShowEntities(renderer, &Game);
     }
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);

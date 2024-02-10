@@ -83,27 +83,26 @@ void InitializeGame(game *Game){
         }
     }
 
-    Game->Pinky.x = 14;
+    Game->Pinky.x = 12;
     Game->Pinky.y = 14;
 
-    Game->Blinky.x = 14;
+    Game->Blinky.x = 13;
     Game->Blinky.y = 14;
 
     Game->Inky.x = 14;
     Game->Inky.y = 14;
 
-    Game->Clyde.x = 14;
+    Game->Clyde.x = 15;
     Game->Clyde.y = 14;
 
-    Game->PacMan.x = 15;
-    Game->PacMan.y = 14;
+    Game->PacMan.x = 13;
+    Game->PacMan.y = 13;
 
     Game->moveCounter = 0;
     Game->cherryActive = 0;
 }
 
-void UpdateGame(game *Game){
-    char input;
+void UpdateGame(game *Game, char input){
 
 //aggiorna la posizione di pacman in base all'input
     switch (input){
@@ -462,16 +461,16 @@ void UpdateGame(game *Game){
 
 
 void resetPacManPosition(game *Game){
-    Game->PacMan.x = 15;
-    Game->PacMan.y = 14;
+    Game->PacMan.x = 13;
+    Game->PacMan.y = 13;
 }
 void resetPinkyPosition(game *Game){
-    Game->Pinky.x = 14;
+    Game->Pinky.x = 12;
     Game->Pinky.y = 14;
 
 }
 void resetInkyPosition(game *Game){
-    Game->Inky.x = 14;
+    Game->Inky.x = 13;
     Game->Inky.y = 14;
 
 }
@@ -480,7 +479,7 @@ void resetBlinkyPosition(game *Game){
     Game->Blinky.y = 14;
 }
 void resetClydePosition(game *Game){
-    Game->Clyde.x = 14;
+    Game->Clyde.x = 15;
     Game->Clyde.y = 14;
 }
 
@@ -660,11 +659,11 @@ void ShowMaze(SDL_Renderer *renderer) {
 }
 
 void ShowEntities(SDL_Renderer *renderer, game *Game) {
-    SDL_SetRenderDrawColor(renderer, 33, 33, 222, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 240, 240, 255);
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            if(Game->maze[i][j] == 'm') {
-                SDL_Rect rect = {j* CELL_SIZE, i*CELL_SIZE, CELL_SIZE, CELL_SIZE};
+            if(Game->maze[i][j] == '.') {
+                SDL_Rect rect = {j* CELL_SIZE, i*CELL_SIZE, 5, 5};
                 SDL_RenderFillRect(renderer, &rect);
             }
         }
@@ -686,7 +685,7 @@ void ShowEntities(SDL_Renderer *renderer, game *Game) {
     SDL_Rect Inky = {Game->Inky.x*CELL_SIZE, Game->Inky.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
     SDL_RenderFillRect(renderer, &Inky);
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 184, 82, 255);
     SDL_Rect Clyde = {Game->Clyde.x*CELL_SIZE, Game->Clyde.y*CELL_SIZE, CELL_SIZE, CELL_SIZE};
     SDL_RenderFillRect(renderer, &Clyde);
 
@@ -697,4 +696,35 @@ void ShowEntities(SDL_Renderer *renderer, game *Game) {
     }
 
     SDL_RenderPresent(renderer);
+}
+
+int HandleEvent(SDL_Event event, int state, char key){
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym) {
+                    case SDLK_w:
+                        key = 'w';
+                        break;
+                    case SDLK_a:
+                        key = 'a';
+                        break;
+                    case SDLK_s:
+                        key = 's';
+                        break;
+                    case SDLK_d:
+                        key = 'd';
+                        break;
+                }
+
+                break;
+            case SDL_QUIT:
+                state = 0;
+                break;
+            default:
+                break;
+        }
+        
+    }
+    return state;
 }
