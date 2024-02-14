@@ -6,6 +6,7 @@
 #define HEIGHT 31
 
 #include <SDL.h>
+#include <stdbool.h>
 
 typedef struct {
     int x;
@@ -29,8 +30,9 @@ typedef struct{
 }game;
 
 void ShowMaze(SDL_Renderer *renderer);
-void InitializeGame(game Game);
-void UpdateGame(game Game);
+void ShowEntities(SDL_Renderer *renderer, game *Game);
+void InitializeGame(game *Game);
+void UpdateGame(game *Game, const bool keys[SDL_NUM_SCANCODES]);
 void updateClydePosition(game *Game);
 void spawnCherry(game *Game);
 void updateInkyPosition(game *game);
@@ -41,8 +43,6 @@ void resetPinkyPosition(game *Game);
 void resetInkyPosition(game *Game);
 void resetBlinkyPosition(game *Game);
 void resetClydePosition(game *Game);
-
-
 #endif //POLIMIAER_GAME_H
 
 
