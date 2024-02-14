@@ -3,7 +3,7 @@ project(Geronimo C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Geronimo main.c)
+add_executable(Geronimo Geronimo_main.c)
 
 find_package(CURL)
 if(CURL_FOUND)
