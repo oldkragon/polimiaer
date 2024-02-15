@@ -44,19 +44,3 @@ Libro cercaLibro(char *titolo) {
     //restituire nuovo Libro
 }
 
-void aggiungiLibro(Libro libro) {
-    //creare JSON con i dettagli del libro
-    //richiesta POST all'API di Notion con il JSON
-}
-
-Libro ottieniDettagliLibro(char *idLibro) {
-    //richiesta GET all'API di Notion con l'ID del libro
-    //gestire la risposta JSON e crea un nuovo Libro
-    //restituire nuovo Libro
-}
-
-//funzione per gestire la risposta dell'API
-size_t WriteCallback(void *contents, size_t size, size_t numel, void *userp){
-    ((std::string*)userp)->append((char*)contents, size * numel);
-    return size * nmemb;
-}
