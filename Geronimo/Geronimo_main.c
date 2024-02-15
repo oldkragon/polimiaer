@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <curl/curl.h>
 #include <json-c/json.h>
+#include <api_key.h>
 
 typedef struct {
     char titolo[50];
@@ -26,7 +27,7 @@ Libro cercaLibro(char *titolo) {
         curl_easy_setopt(curl, CURLOPT_URL, "https://api.notion.com/v1/database/2aadd6548a4e4199939de3bfccdbc06b");//diff con search?
 
         struct curl_slist *headers = NULL;
-        headers = curl_slist_append(headers, "Authorization: Bearer ");
+        headers = curl_slist_append(headers, "Authorization: Bearer %s", EVA_API_KEY);
         headers = curl_slist_append(headers, "Notion-Version: 2022-02-22");
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
