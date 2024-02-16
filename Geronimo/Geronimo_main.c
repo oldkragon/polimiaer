@@ -13,10 +13,10 @@ typedef struct {
 Libro cercaLibro(char *titolo);
 void aggiungiLibro(Libro libro);
 Libro ottieniDettagliLibro(char *idLibro);
-size_t WriteCallback(void *contents, size_t size, size_t numel, void *userp);
+size_t WriteCallback(void *contents, size_t size, size_t numel, char *userp);
 
-size_t WriteCallback(void *contents, size_t size, size_t nmemb, char *userp){
-    size_t totalSize = size * nmemb;
+size_t WriteCallback(void *contents, size_t size, size_t numel, char *userp){
+    size_t totalSize = size * numel;
     strncat(userp, contents, totalSize);
     return totalSize;
 }
