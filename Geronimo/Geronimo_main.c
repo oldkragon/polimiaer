@@ -2,7 +2,7 @@
 #include <string.h>
 #include <curl.h>
 #include <json.h>
-#include <api_key.h>
+#include "./include/api_key.h"
 
 typedef struct {
     char titolo[50];
@@ -70,3 +70,6 @@ Libro cercaLibro(char *titolo) {
     return libro;
 }
 
+int main() {
+    return 0;
+}
